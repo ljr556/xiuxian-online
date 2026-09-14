@@ -1,0 +1,11 @@
+# 系统与编辑器
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# 本地临时
+*.log
+.env

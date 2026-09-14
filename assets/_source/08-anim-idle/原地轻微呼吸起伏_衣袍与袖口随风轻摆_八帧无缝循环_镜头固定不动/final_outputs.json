@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "job_id": "job_0fdf03d8c5154595a798ca2a47aded41",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\08-anim-idle\\原地轻微呼吸起伏_衣袍与袖口随风轻摆_八帧无缝循环_镜头固定不动\\result_output_url.webp",
+      "mime_type": "image/webp"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\08-anim-idle\\原地轻微呼吸起伏_衣袍与袖口随风轻摆_八帧无缝循环_镜头固定不动\\result_output_transparent_output_urls_gif.gif",
+      "mime_type": "image/gif"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\08-anim-idle\\原地轻微呼吸起伏_衣袍与袖口随风轻摆_八帧无缝循环_镜头固定不动\\result_output_transparent_output_urls_png.png",
+      "mime_type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1412" />
+  <meta name="description" content="云海仙途 · 修仙升级页游，打坐、突破、斩妖、炼丹，手机上也能玩。" />
+  <title>云海仙途 · 修仙升级</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="realm-badge">
+        <span class="realm-name" id="realmName">炼气</span>
+        <span class="realm-layer" id="realmLayer">一层</span>
+      </div>
+      <div class="wallet">
+        <div class="wallet-item" title="灵气">
+          <img class="icon" id="iconQi" src="assets/icons/icon_qi.png" alt="" onerror="this.style.display='none'" />
+          <span class="num" id="qiValue">0</span>
+        </div>
+        <div class="wallet-item" title="灵石">
+          <img class="icon" id="iconStone" src="assets/icons/icon_stone.png" alt="" onerror="this.style.display='none'" />
+          <span class="num" id="stoneValue">0</span>
+        </div>
+        <button class="sound-toggle" id="soundToggle" title="音效开关">♪</button>
+      </div>
+    </header>
+
+    <main class="stage" id="stage">
+      <img class="bg" id="bgImage" src="assets/bg_mountain.png" alt="" />
+      <div class="mist"></div>
+      <div class="bg-tint"></div>
+      <div class="qi-particles" id="particles"></div>
+
+      <div class="hero-wrap" id="heroWrap">
+        <div class="hero-aura"></div>
+        <img class="hero" id="heroImage" src="assets/hero.png" alt="修士" />
+        <div class="slash" id="slashFx"></div>
+        <div class="hero-shadow"></div>
+      </div>
+
+      <div class="float-layer" id="floatLayer"></div>
+
+      <div class="progress-block">
+        <div class="progress-labels">
+          <span id="progressLabel">修为</span>
+          <span id="progressValue">0 / 0</span>
+        </div>
+        <div class="bar"><div class="bar-fill" id="progressFill"></div></div>
+        <div class="progress-labels sub">
+          <span id="qiRate">灵气 0 / 秒</span>
+          <span id="stoneRate">灵石 0 / 秒</span>
+        </div>
+      </div>
+
+      <button class="breakthrough-btn hidden" id="breakthroughBtn">
+        <span class="bt-glow"></span>
+        <span class="bt-text">突破 · 渡雷劫</span>
+        <span class="bt-chance" id="btChance">成功率 60%</span>
+      </button>
+    </main>
+
+    <section class="combat" id="combatPanel">
+      <div class="beast-side">
+        <img class="beast" id="beastImage" src="assets/beast.png" alt="妖兽" />
+        <div class="beast-name" id="beastName">妖狼</div>
+      </div>
+      <div class="battle-side">
+        <div class="bar beast-bar"><div class="bar-fill beast-hp" id="beastHpFill"></div></div>
+        <div class="battle-meta">
+          <span id="beastHpText">0 / 0</span>
+          <span id="attackPower">剑意 0</span>
+        </div>
+        <div class="battle-actions">
+          <button class="btn primary" id="attackBtn">御剑攻击</button>
+          <button class="btn ghost" id="autoBtn">自动：关</button>
+        </div>
+        <div class="battle-log" id="battleLog">斩妖可得灵石，灵石可换功法。</div>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="cultivate">修炼</button>
+      <button class="tab" data-tab="skills">功法</button>
+      <button class="tab" data-tab="pills">丹药</button>
+      <button class="tab" data-tab="daily">日课</button>
+      <button class="tab" data-tab="grotto">洞天</button>
+    </nav>
+
+    <section class="panel" id="panel-cultivate">
+      <button class="cultivate-btn" id="cultivateBtn">
+        <span class="cb-ring"></span>
+        <span class="cb-text">打 坐 吐 纳</span>
+        <span class="cb-sub" id="cultivateGain">+1 灵气</span>
+      </button>
+      <p class="hint">点击打坐吸纳灵气，灵气化为修为。修为圆满即可突破境界。</p>
+      <div class="section-title">境界阶梯</div>
+      <div class="ladder" id="realmLadder"></div>
+      <div class="section-title">近事</div>
+      <div class="mini-log" id="miniLog"></div>
+    </section>
+
+    <section class="panel hidden" id="panel-skills">
+      <div class="list" id="skillList"></div>
+    </section>
+
+    <section class="panel hidden" id="panel-pills">
+      <div class="list" id="pillList"></div>
+    </section>
+
+    <section class="panel hidden" id="panel-daily">
+      <div class="section-title">今日日课</div>
+      <div class="daily-head">
+        <span id="dailyDate"></span>
+        <span id="dailyProgress"></span>
+      </div>
+      <div class="list" id="questList"></div>
+      <p class="hint">日课每日零时重置，完成即可领取灵石与丹药。</p>
+    </section>
+
+    <section class="panel hidden" id="panel-grotto">
+      <div class="section-title">宗门</div>
+      <div class="sect-card" id="sectCard"></div>
+      <div class="section-title">天榜 · 道行排行</div>
+      <div class="rank-list" id="rankList"></div>
+      <p class="rank-note" id="rankNote"></p>
+      <div class="section-title">道途统计</div>
+      <div class="stats" id="statsBox"></div>
+      <div class="section-title">修行记事</div>
+      <div class="log" id="logBox"></div>
+      <div class="records-actions">
+        <button class="btn ghost" id="tutorialBtn">重看新手教程</button>
+        <button class="btn ghost" id="saveBtn">手动存档</button>
+        <button class="btn danger" id="resetBtn">转世重修</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span id="saveHint">自动存档已开启</span>
+    </footer>
+  </div>
+
+  <div class="toast-layer" id="toastLayer"></div>
+  <div class="tut-dim hidden" id="tutDim"></div>
+  <div class="tut-tip hidden" id="tutTip">
+    <h4 id="tutTitle"></h4>
+    <p id="tutText"></p>
+    <div class="tut-foot">
+      <div class="dots" id="tutDots"></div>
+      <div class="tut-btns">
+        <button id="tutSkip">跳过</button>
+        <button id="tutPrev">上一步</button>
+        <button class="primary" id="tutNext">下一步</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal hidden" id="modal">
+    <div class="modal-card">
+      <h2 id="modalTitle">闭关归来</h2>
+      <p id="modalBody"></p>
+      <button class="btn primary" id="modalOk">继续修行</button>
+    </div>
+  </div>
+  <div class="thunder-layer" id="thunderLayer"></div>
+
+  <script src="game.js"></script>
+</body>
+</html>

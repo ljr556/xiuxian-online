@@ -1,0 +1,31 @@
+{
+  "status": "success",
+  "job_id": "job_317cb1be8f304e74b7dd25e66f554dab",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\06-sfx\\修仙游戏的短音效包_灵气汇聚_飞剑破空_斩妖得胜_修为精进_雷劫雷鸣\\01_Magic_Qi_Gathering.mp3",
+      "mime_type": "audio/mpeg"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\06-sfx\\修仙游戏的短音效包_灵气汇聚_飞剑破空_斩妖得胜_修为精进_雷劫雷鸣\\02_Flying_Sword_Strike.mp3",
+      "mime_type": "audio/mpeg"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\06-sfx\\修仙游戏的短音效包_灵气汇聚_飞剑破空_斩妖得胜_修为精进_雷劫雷鸣\\03_Demon_Slaying_Victory.mp3",
+      "mime_type": "audio/mpeg"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\06-sfx\\修仙游戏的短音效包_灵气汇聚_飞剑破空_斩妖得胜_修为精进_雷劫雷鸣\\04_Cultivation_Breakthrough.mp3",
+      "mime_type": "audio/mpeg"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\06-sfx\\修仙游戏的短音效包_灵气汇聚_飞剑破空_斩妖得胜_修为精进_雷劫雷鸣\\05_Heavenly_Thunder_Tribulation.mp3",
+      "mime_type": "audio/mpeg"
+    }
+  ]
+}

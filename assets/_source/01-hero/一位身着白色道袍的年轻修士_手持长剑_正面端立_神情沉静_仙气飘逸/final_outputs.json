@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "job_id": "job_a1ee7a78243c4794b1905fdaabcbdbbc",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\01-hero\\一位身着白色道袍的年轻修士_手持长剑_正面端立_神情沉静_仙气飘逸\\sprite_00.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\01-hero\\一位身着白色道袍的年轻修士_手持长剑_正面端立_神情沉静_仙气飘逸\\sprite_01.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\01-hero\\一位身着白色道袍的年轻修士_手持长剑_正面端立_神情沉静_仙气飘逸\\sprite_pack_preview.png",
+      "mime_type": "image/png"
+    }
+  ]
+}
