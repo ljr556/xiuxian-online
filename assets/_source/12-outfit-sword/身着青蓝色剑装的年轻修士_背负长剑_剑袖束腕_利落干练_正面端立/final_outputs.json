@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "job_id": "job_95a4701becfc4810a3ec7f60cb01dfec",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\12-outfit-sword\\身着青蓝色剑装的年轻修士_背负长剑_剑袖束腕_利落干练_正面端立\\sprite_00.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\12-outfit-sword\\身着青蓝色剑装的年轻修士_背负长剑_剑袖束腕_利落干练_正面端立\\sprite_01.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\12-outfit-sword\\身着青蓝色剑装的年轻修士_背负长剑_剑袖束腕_利落干练_正面端立\\sprite_pack_preview.png",
+      "mime_type": "image/png"
+    }
+  ]
+}

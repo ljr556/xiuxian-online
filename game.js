@@ -255,6 +255,115 @@
     };
   });
 
+  // 衣冠：服装 + 法宝 + 灵宠
+  var OUTFITS = [
+    {
+      id: 'dao', name: '青云道袍', rarity: '凡品', file: 'assets/hero.png',
+      desc: '青云宗制式道袍，朴素却便于行走。',
+      qi: 0, atk: 0, crit: 0, pill: 0,
+      unlock: { type: 'default' }
+    },
+    {
+      id: 'cloth', name: '青衫布衣', rarity: '凡品', file: 'assets/outfits/cloth.png',
+      desc: '山下集市买来的粗布短打，轻便利落。',
+      qi: 0.03, atk: 0.02, crit: 0, pill: 0,
+      unlock: { type: 'stones', value: 260 }
+    },
+    {
+      id: 'armor', name: '玄铁战甲', rarity: '良品', file: 'assets/outfits/armor.png',
+      desc: '玄铁锻造的战甲，护住要害，也压得住性子。',
+      qi: 0.05, atk: 0.08, crit: 0, pill: 0,
+      unlock: { type: 'stones', value: 1400 }
+    },
+    {
+      id: 'sword', name: '太虚剑装', rarity: '良品', file: 'assets/outfits/sword.png',
+      desc: '太虚剑派的束袖剑装，抬手即是剑势。',
+      qi: 0.04, atk: 0.12, crit: 0.03, pill: 0,
+      unlock: { type: 'realm', value: 1 }
+    },
+    {
+      id: 'alchemy', name: '丹霞法袍', rarity: '上品', file: 'assets/outfits/alchemy.png',
+      desc: '丹霞谷法袍，袖口绣丹炉纹，炼丹事半功倍。',
+      qi: 0.08, atk: 0.02, crit: 0.02, pill: 0.15,
+      unlock: { type: 'stones', value: 7200 }
+    },
+    {
+      id: 'demonic', name: '幽月魔袍', rarity: '上品', file: 'assets/outfits/demonic.png',
+      desc: '来路不明的魔道衣袍，气息阴冷，极增杀伤。',
+      qi: 0.06, atk: 0.18, crit: 0.08, pill: 0,
+      unlock: { type: 'boss', value: 5 }
+    },
+    {
+      id: 'immortal', name: '仙尊云袍', rarity: '仙品', file: 'assets/outfits/immortal.png',
+      desc: '传说中飞升者所着的云纹仙袍，周身云气流转。',
+      qi: 0.25, atk: 0.20, crit: 0.10, pill: 0.10,
+      unlock: { type: 'realm', value: 4 }
+    }
+  ];
+
+  var EQUIP_SLOTS = [
+    {
+      id: 'sword', name: '法剑', icon: 'icon_sword.png',
+      items: [
+        { id: 'sword-1', name: '青锋剑', cost: 500, atk: 0.12, desc: '剑意 +12%' },
+        { id: 'sword-2', name: '赤霄剑', cost: 4200, atk: 0.28, desc: '剑意 +28%' },
+        { id: 'sword-3', name: '斩月剑', cost: 32000, atk: 0.55, desc: '剑意 +55%' }
+      ]
+    },
+    {
+      id: 'robe', name: '法衣', icon: 'icon_shield.png',
+      items: [
+        { id: 'robe-1', name: '素纱法衣', cost: 600, qi: 0.10, desc: '灵气 +10%' },
+        { id: 'robe-2', name: '云纹法衣', cost: 5200, qi: 0.22, desc: '灵气 +22%' },
+        { id: 'robe-3', name: '星罗天衣', cost: 38000, qi: 0.45, desc: '灵气 +45%' }
+      ]
+    },
+    {
+      id: 'crown', name: '道冠', icon: 'icon_mountain.png',
+      items: [
+        { id: 'crown-1', name: '木簪', cost: 700, crit: 0.03, desc: '暴击 +3%' },
+        { id: 'crown-2', name: '紫玉冠', cost: 6400, crit: 0.06, desc: '暴击 +6%' },
+        { id: 'crown-3', name: '太清冠', cost: 46000, crit: 0.10, desc: '暴击 +10%' }
+      ]
+    },
+    {
+      id: 'talisman', name: '护符', icon: 'icon_talisman.png',
+      items: [
+        { id: 'talisman-1', name: '聚灵石符', cost: 800, stone: 0.15, desc: '灵石 +15%' },
+        { id: 'talisman-2', name: '藏风玉符', cost: 7000, stone: 0.30, desc: '灵石 +30%' },
+        { id: 'talisman-3', name: '乾坤宝符', cost: 52000, stone: 0.60, desc: '灵石 +60%' }
+      ]
+    }
+  ];
+
+  var PETS = [
+    {
+      id: 'fox', name: '雪狐', rarity: '良品', icon: 'icon_water.png',
+      desc: '灵动的雪狐，会替你叼来灵气。',
+      qi: 0.06, atk: 0.05, auto: 3200, autoDamage: 0.6,
+      unlock: { type: 'stones', value: 900 }
+    },
+    {
+      id: 'crane', name: '青鸾', rarity: '上品', icon: 'icon_wind.png',
+      desc: '青鸾振翅，剑势随之加速。',
+      qi: 0.05, atk: 0.14, auto: 2600, autoDamage: 1.0,
+      unlock: { type: 'stones', value: 8800 }
+    },
+    {
+      id: 'turtle', name: '玄龟', rarity: '上品', icon: 'icon_mountain.png',
+      desc: '玄龟沉稳，护你渡劫，也助你闭关。',
+      qi: 0.10, atk: 0.04, auto: 4200, autoDamage: 0.8, offline: 0.15, breakthrough: 5,
+      unlock: { type: 'boss', value: 3 }
+    }
+  ];
+
+  var WEATHERS = [
+    { id: 'clear', name: '晴空', desc: '天光正好，无额外加成。', qi: 0, atk: 0, crit: 0 },
+    { id: 'rain', name: '灵雨', desc: '灵雨滋润，灵气产出 +20%。', qi: 0.20, atk: 0, crit: 0 },
+    { id: 'wind', name: '罡风', desc: '罡风激荡，剑意 +15%。', qi: 0, atk: 0.15, crit: 0 },
+    { id: 'storm', name: '紫电', desc: '雷云蕴电，暴击 +5%。', qi: 0.05, atk: 0.05, crit: 0.05 }
+  ];
+
   var SOUNDS = {
     click: 'assets/sfx/sfx_cultivate.mp3',
     attack: 'assets/sfx/sfx_attack.mp3',
@@ -264,6 +373,11 @@
   };
 
   var MUSIC_SRC = 'assets/bgm.mp3';
+  var HERO_ANIM = 'assets/hero_idle.webp';
+  var HERO_ATTACK = 'assets/hero_attack.webp';
+  var heroAnimReady = false;
+  var heroAttackReady = false;
+  var attackFrameTimer = null;
 
   var state = null;
   var ui = {};
@@ -280,11 +394,11 @@
     var fromArray = techLevel('array') * 0.6;
     var mult = state.buffs.qiMult > 0 ? 2 : 1;
     return (base + fromArray) * mult * sectQiMult()
-      * (1 + techLevel('root') * 0.08) * (1 + achBonuses().qi);
+      * (1 + techLevel('root') * 0.08) * (1 + achBonuses().qi) * (1 + gearBonus().qi);
   }
 
   function stonesPerSec() {
-    return techLevel('ward') * 0.5;
+    return techLevel('ward') * 0.5 * (1 + gearBonus().stone);
   }
 
   function clickGain() {
@@ -293,7 +407,7 @@
 
   function attackPower() {
     return Math.round((5 + techLevel('sword') * 4 + state.realm * 6)
-      * sectAttackMult() * (1 + achBonuses().atk));
+      * sectAttackMult() * (1 + achBonuses().atk) * (1 + gearBonus().atk));
   }
 
   function autoInterval() {
@@ -303,7 +417,7 @@
   }
 
   function breakthroughChance() {
-    var base = 62 + techLevel('insight') * 3 + state.buffs.breakBonus;
+    var base = 62 + techLevel('insight') * 3 + state.buffs.breakBonus + gearBonus().breakthrough;
     base -= Math.min(28, state.realm * 3);
     return Math.max(12, Math.min(96, base));
   }
@@ -347,9 +461,52 @@
 
   function critChance(levelOverride) {
     var lv = typeof levelOverride === 'number' ? levelOverride : techLevel('sense');
-    var base = 0.05 + lv * 0.03 + state.realm * 0.005;
+    var base = 0.05 + lv * 0.03 + state.realm * 0.005 + gearBonus().crit;
     if (state.buffs.critBoost > 0) base *= 2;
     return Math.max(0.05, Math.min(0.65, base));
+  }
+
+  function currentOutfit() {
+    return OUTFITS.filter(function (item) { return item.id === state.outfit; })[0] || OUTFITS[0];
+  }
+
+  function currentWeather() {
+    return WEATHERS.filter(function (item) { return item.id === state.weather; })[0] || WEATHERS[0];
+  }
+
+  function currentPet() {
+    return PETS.filter(function (item) { return item.id === state.pet; })[0] || null;
+  }
+
+  function equipBonus() {
+    var total = { qi: 0, atk: 0, crit: 0, stone: 0 };
+    EQUIP_SLOTS.forEach(function (slot) {
+      var itemId = state.equipment[slot.id];
+      if (!itemId) return;
+      var item = slot.items.filter(function (entry) { return entry.id === itemId; })[0];
+      if (!item) return;
+      total.qi += item.qi || 0;
+      total.atk += item.atk || 0;
+      total.crit += item.crit || 0;
+      total.stone += item.stone || 0;
+    });
+    return total;
+  }
+
+  function gearBonus() {
+    var outfit = currentOutfit();
+    var weather = currentWeather();
+    var pet = currentPet();
+    var equip = equipBonus();
+    return {
+      qi: outfit.qi + weather.qi + equip.qi + (pet ? pet.qi : 0) + (state.isNight ? 0.10 : 0),
+      atk: outfit.atk + weather.atk + equip.atk + (pet ? pet.atk : 0),
+      crit: outfit.crit + weather.crit + equip.crit,
+      stone: equip.stone,
+      pill: outfit.pill,
+      offline: pet && pet.offline ? pet.offline : 0,
+      breakthrough: pet && pet.breakthrough ? pet.breakthrough : 0
+    };
   }
 
   function critMultiplier() {
@@ -362,7 +519,7 @@
 
   function offlineRate(levelOverride) {
     var lv = typeof levelOverride === 'number' ? levelOverride : techLevel('escape');
-    return Math.min(1, OFFLINE_RATE + lv * 0.06);
+    return Math.min(1.2, OFFLINE_RATE + lv * 0.06 + gearBonus().offline);
   }
 
   function autoCultivateInterval() {
@@ -372,7 +529,7 @@
   }
 
   function pillPower() {
-    return 1 + techLevel('pillcraft') * 0.2;
+    return 1 + techLevel('pillcraft') * 0.2 + gearBonus().pill;
   }
 
   function achBonuses() {
@@ -457,6 +614,13 @@
       forceBoss: false,
       achievements: [],
       dailyDone: false,
+      outfits: ['dao'],
+      outfit: 'dao',
+      equipment: {},
+      pets: [],
+      pet: '',
+      weather: 'clear',
+      isNight: false,
       autoBattle: true,
       breakthroughs: 0,
       failures: 0,
@@ -506,6 +670,11 @@
         { lifetime: 0, totalKills: 0, totalClicks: 0, totalBreakthroughs: 0, maxRealm: 0 },
         data.records || {}
       );
+      state.equipment = Object.assign({}, data.equipment || {});
+      state.outfits = Array.isArray(data.outfits) && data.outfits.length ? data.outfits : ['dao'];
+      state.pets = Array.isArray(data.pets) ? data.pets : [];
+      if (state.outfits.indexOf('dao') < 0) state.outfits.unshift('dao');
+      if (OUTFITS.every(function (item) { return item.id !== state.outfit; })) state.outfit = 'dao';
     } catch (e) {
       state = defaultState();
       return null;
@@ -513,8 +682,9 @@
     var elapsed = Math.max(0, (now() - (state.lastTick || now())) / 1000);
     var capped = Math.min(elapsed, OFFLINE_CAP_HOURS * 3600);
     if (capped < 30) return null;
-    var gainQi = qiPerSec() * capped * OFFLINE_RATE;
-    var gainStones = stonesPerSec() * capped * OFFLINE_RATE;
+    var rate = offlineRate();
+    var gainQi = qiPerSec() * capped * rate;
+    var gainStones = stonesPerSec() * capped * rate;
     state.qi += gainQi;
     state.stones += gainStones;
     return {
@@ -588,21 +758,43 @@
     function tryNext() {
       if (index >= candidates.length) return;
       var probe = new Image();
-      probe.onload = function () { ui.heroImage.setAttribute('src', candidates[index]); };
+      probe.onload = function () {
+        heroAnimReady = candidates[index] === HERO_ANIM;
+        applyHeroArt();
+        var attackProbe = new Image();
+        attackProbe.onload = function () { heroAttackReady = true; };
+        attackProbe.src = HERO_ATTACK;
+      };
       probe.onerror = function () { index++; tryNext(); };
       probe.src = candidates[index];
     }
     tryNext();
   }
 
+  function applyHeroArt() {
+    if (!ui.heroImage) return;
+    var outfit = currentOutfit();
+    if (outfit.id === 'dao' && heroAnimReady) {
+      ui.heroImage.setAttribute('src', HERO_ANIM);
+    } else {
+      ui.heroImage.setAttribute('src', outfit.file);
+    }
+  }
+
   function playAttackFx() {
-    ui.heroImage.classList.remove('attack');
-    void ui.heroImage.offsetWidth;
-    ui.heroImage.classList.add('attack');
+    if (state.outfit === 'dao' && heroAttackReady) {
+      ui.heroImage.setAttribute('src', HERO_ATTACK);
+      if (attackFrameTimer) clearTimeout(attackFrameTimer);
+      attackFrameTimer = setTimeout(applyHeroArt, 820);
+    } else {
+      ui.heroImage.classList.remove('attack');
+      void ui.heroImage.offsetWidth;
+      ui.heroImage.classList.add('attack');
+      setTimeout(function () { ui.heroImage.classList.remove('attack'); }, 360);
+    }
     ui.slashFx.classList.remove('on');
     void ui.slashFx.offsetWidth;
     ui.slashFx.classList.add('on');
-    setTimeout(function () { ui.heroImage.classList.remove('attack'); }, 360);
   }
 
   function spawnSparks(container, x, y, count, spread) {
@@ -1084,6 +1276,294 @@
     }
   }
 
+  /* ---------------- 衣冠：服装 / 法宝 / 灵宠 ---------------- */
+
+  function outfitBonusText(outfit) {
+    var parts = [];
+    if (outfit.qi) parts.push('灵气 +' + Math.round(outfit.qi * 100) + '%');
+    if (outfit.atk) parts.push('剑意 +' + Math.round(outfit.atk * 100) + '%');
+    if (outfit.crit) parts.push('暴击 +' + Math.round(outfit.crit * 100) + '%');
+    if (outfit.pill) parts.push('丹药效果 +' + Math.round(outfit.pill * 100) + '%');
+    return parts.length ? parts.join('、') : '无属性加成';
+  }
+
+  function outfitUnlockText(outfit) {
+    var unlock = outfit.unlock;
+    if (unlock.type === 'default') return '初始装扮';
+    if (unlock.type === 'stones') return fmt(unlock.value) + ' 灵石';
+    if (unlock.type === 'realm') return REALMS[unlock.value].name + '境';
+    if (unlock.type === 'boss') return '斩妖王 ' + unlock.value + ' 位';
+    return '';
+  }
+
+  function unlockOutfit(id) {
+    var outfit = OUTFITS.filter(function (item) { return item.id === id; })[0];
+    if (!outfit || state.outfits.indexOf(id) >= 0) return;
+    var unlock = outfit.unlock;
+    if (unlock.type === 'stones') {
+      if (state.stones < unlock.value) { toast('灵石不足'); return; }
+      state.stones -= unlock.value;
+    } else if (unlock.type === 'realm') {
+      if (state.realm < unlock.value) { toast('需 ' + REALMS[unlock.value].name + ' 境'); return; }
+    } else if (unlock.type === 'boss') {
+      if (state.bossKills < unlock.value) { toast('需斩 ' + unlock.value + ' 位妖王'); return; }
+    } else {
+      return;
+    }
+    state.outfits.push(id);
+    playSound('win');
+    addLog('得【' + outfit.name + '】（' + outfit.rarity + '）：' + outfitBonusText(outfit) + '。', 'good');
+    toast('获得 ' + outfit.name);
+    renderOutfit();
+    renderStats();
+  }
+
+  function wearOutfit(id) {
+    if (state.outfits.indexOf(id) < 0) { toast('尚未拥有'); return; }
+    if (state.outfit === id) return;
+    state.outfit = id;
+    playSound('levelup');
+    addLog('换上【' + currentOutfit().name + '】。', 'good');
+    flashHero();
+    applyHeroArt();
+    renderOutfit();
+    renderProgress();
+    renderBattle();
+    renderStats();
+    save();
+  }
+
+  function flashHero() {
+    if (!ui.heroImage) return;
+    ui.heroImage.classList.remove('switching');
+    void ui.heroImage.offsetWidth;
+    ui.heroImage.classList.add('switching');
+    setTimeout(function () { ui.heroImage.classList.remove('switching'); }, 650);
+  }
+
+  function outfitCard(outfit) {
+    var owned = state.outfits.indexOf(outfit.id) >= 0;
+    var equipped = state.outfit === outfit.id;
+    var card = document.createElement('div');
+    card.className = 'outfit-card' + (owned ? ' owned' : ' locked') + (equipped ? ' equipped' : '');
+    card.innerHTML =
+      '<img src="' + outfit.file + '" alt="" onerror="this.style.display=\'none\'" />' +
+      '<span class="name">' + outfit.name + '</span>' +
+      '<span class="tagline">' + (equipped ? '已穿戴' : (owned ? '点击穿戴' : outfitUnlockText(outfit))) + '</span>';
+    card.addEventListener('click', function () {
+      if (equipped) { toast('已经穿着了'); return; }
+      if (owned) wearOutfit(outfit.id);
+      else unlockOutfit(outfit.id);
+      renderOutfit();
+      renderWardrobe();
+    });
+    return card;
+  }
+
+  function renderOutfit() {
+    if (!ui.outfitCurrent) return;
+    var outfit = currentOutfit();
+    var gear = gearBonus();
+    ui.gearBonusText.textContent = '总加成 灵气 +' + Math.round(gear.qi * 100) + '% · 剑意 +'
+      + Math.round(gear.atk * 100) + '% · 暴击 +' + Math.round(gear.crit * 100) + '%';
+    ui.outfitCurrent.innerHTML =
+      '<img src="' + outfit.file + '" alt="" onerror="this.style.display=\'none\'" />' +
+      '<div class="oc-body">' +
+        '<h3>' + outfit.name + '</h3>' +
+        '<span class="rarity">' + outfit.rarity + '</span>' +
+        '<p>' + outfit.desc + '</p>' +
+        '<div class="bonus">' + outfitBonusText(outfit) + '</div>' +
+      '</div>';
+    ui.outfitCount.textContent = state.outfits.length + ' / ' + OUTFITS.length;
+    ui.outfitGrid.innerHTML = '';
+    OUTFITS.forEach(function (item) { ui.outfitGrid.appendChild(outfitCard(item)); });
+  }
+
+  function renderWardrobe() {
+    if (!ui.wardrobeGrid) return;
+    ui.wardrobeGrid.innerHTML = '';
+    OUTFITS.forEach(function (item) { ui.wardrobeGrid.appendChild(outfitCard(item)); });
+  }
+
+  function buyEquipment(slotId, itemId) {
+    var slot = EQUIP_SLOTS.filter(function (entry) { return entry.id === slotId; })[0];
+    if (!slot) return;
+    var item = slot.items.filter(function (entry) { return entry.id === itemId; })[0];
+    if (!item || state.equipment[slotId] === itemId) return;
+    if (state.stones < item.cost) { toast('灵石不足'); return; }
+    state.stones -= item.cost;
+    state.equipment[slotId] = itemId;
+    playSound('win');
+    addLog('祭炼【' + item.name + '】（' + item.desc + '）。', 'good');
+    toast('已佩戴 ' + item.name);
+    renderEquipment();
+    renderOutfit();
+    renderProgress();
+    renderBattle();
+    renderTop();
+    save();
+  }
+
+  function renderEquipment() {
+    if (!ui.equipList) return;
+    ui.equipList.innerHTML = '';
+    EQUIP_SLOTS.forEach(function (slot) {
+      var currentId = state.equipment[slot.id];
+      var current = slot.items.filter(function (item) { return item.id === currentId; })[0];
+      var card = document.createElement('div');
+      card.className = 'card equip-card';
+      var lines = slot.items.map(function (item) {
+        var has = currentId === item.id;
+        return '<span class="' + (has ? 'has' : '') + '">' + item.name + ' · ' + item.desc + ' · ' + fmt(item.cost) + '</span>';
+      }).join('');
+      var buttons = slot.items.map(function (item) {
+        var has = currentId === item.id;
+        var can = state.stones >= item.cost;
+        return '<button data-slot="' + slot.id + '" data-item="' + item.id + '"' +
+          (has || !can ? ' disabled' : '') + '>' + (has ? '已佩戴' : '祭炼 ' + fmt(item.cost)) + '</button>';
+      }).join('');
+      card.innerHTML =
+        '<img src="assets/icons/' + slot.icon + '" alt="" onerror="this.style.display=\'none\'" />' +
+        '<div class="card-body">' +
+          '<div class="card-title"><span>' + slot.name + '</span><span class="lv">' +
+            (current ? current.name : '未佩戴') + '</span></div>' +
+          '<div class="equip-lines">' + lines + '</div>' +
+          '<div class="equip-btns">' + buttons + '</div>' +
+        '</div>';
+      Array.prototype.forEach.call(card.querySelectorAll('button'), function (button) {
+        button.addEventListener('click', function () {
+          buyEquipment(button.getAttribute('data-slot'), button.getAttribute('data-item'));
+        });
+      });
+      ui.equipList.appendChild(card);
+    });
+  }
+
+  function petBonusText(pet) {
+    var parts = [];
+    if (pet.qi) parts.push('灵气 +' + Math.round(pet.qi * 100) + '%');
+    if (pet.atk) parts.push('剑意 +' + Math.round(pet.atk * 100) + '%');
+    if (pet.offline) parts.push('离线 +' + Math.round(pet.offline * 100) + '%');
+    if (pet.breakthrough) parts.push('渡劫 +' + pet.breakthrough + '%');
+    if (pet.auto) parts.push('每 ' + (pet.auto / 1000).toFixed(1) + ' 秒助战');
+    return parts.join('、');
+  }
+
+  function unlockPet(id) {
+    var pet = PETS.filter(function (item) { return item.id === id; })[0];
+    if (!pet || state.pets.indexOf(id) >= 0) return;
+    var unlock = pet.unlock;
+    if (unlock.type === 'stones') {
+      if (state.stones < unlock.value) { toast('灵石不足'); return; }
+      state.stones -= unlock.value;
+    } else if (unlock.type === 'boss') {
+      if (state.bossKills < unlock.value) { toast('需斩 ' + unlock.value + ' 位妖王'); return; }
+    } else {
+      return;
+    }
+    state.pets.push(id);
+    state.pet = id;
+    playSound('win');
+    addLog('收服灵宠【' + pet.name + '】：' + petBonusText(pet) + '。', 'good');
+    toast('收服 ' + pet.name);
+    renderPets();
+    renderOutfit();
+    renderProgress();
+    renderBattle();
+    save();
+  }
+
+  function selectPet(id) {
+    if (state.pets.indexOf(id) < 0) { unlockPet(id); return; }
+    state.pet = state.pet === id ? '' : id;
+    playSound('click');
+    addLog(state.pet === id ? '唤出灵宠【' + currentPet().name + '】。' : '让灵宠回洞府休息。', 'warn');
+    renderPets();
+    renderOutfit();
+    renderProgress();
+    renderBattle();
+    save();
+  }
+
+  function renderPets() {
+    if (!ui.petList) return;
+    ui.petList.innerHTML = '';
+    PETS.forEach(function (pet) {
+      var owned = state.pets.indexOf(pet.id) >= 0;
+      var active = state.pet === pet.id;
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML =
+        '<img src="assets/icons/' + pet.icon + '" alt="" onerror="this.style.display=\'none\'" />' +
+        '<div class="card-body">' +
+          '<div class="card-title"><span>' + pet.name + '</span><span class="lv">' + pet.rarity + '</span></div>' +
+          '<div class="card-desc">' + pet.desc + '　' + petBonusText(pet) + '</div>' +
+          '<div class="card-foot">' +
+            '<span class="cost">' + (owned ? (active ? '出战中' : '待命') : outfitUnlockText(pet)) + '</span>' +
+            '<button ' + (!owned && pet.unlock.type === 'stones' && state.stones < pet.unlock.value ? 'disabled' : '') + '>' +
+            (owned ? (active ? '收起' : '出战') : '收服') + '</button>' +
+          '</div>' +
+        '</div>';
+      card.querySelector('button').addEventListener('click', function () {
+        if (owned) selectPet(pet.id);
+        else unlockPet(pet.id);
+      });
+      ui.petList.appendChild(card);
+    });
+  }
+
+  /* ---------------- 天象与昼夜 ---------------- */
+
+  function applyWeatherVisual() {
+    if (!ui.weatherLayer || !ui.app) return;
+    ui.app.classList.toggle('night', !!state.isNight);
+    ui.weatherLayer.innerHTML = '';
+    if (state.weather === 'rain') {
+      var rain = document.createElement('div');
+      rain.className = 'rain';
+      ui.weatherLayer.appendChild(rain);
+    } else if (state.weather === 'wind') {
+      var wind = document.createElement('div');
+      wind.className = 'wind';
+      ui.weatherLayer.appendChild(wind);
+    } else if (state.weather === 'storm') {
+      var storm = document.createElement('div');
+      storm.className = 'storm';
+      ui.weatherLayer.appendChild(storm);
+    }
+    renderWeatherChip();
+  }
+
+  function renderWeatherChip() {
+    if (!ui.weatherChip) return;
+    var weather = currentWeather();
+    ui.weatherChip.textContent = weather.name + ' · ' + (state.isNight ? '夜' : '昼');
+    ui.weatherChip.title = weather.desc;
+  }
+
+  function rollWeather() {
+    var pool = ['clear', 'rain', 'wind', 'storm', 'clear'];
+    var next = pool[Math.floor(Math.random() * pool.length)];
+    state.weather = next;
+    var weather = currentWeather();
+    applyWeatherVisual();
+    if (next !== 'clear') {
+      addLog('天象转为【' + weather.name + '】：' + weather.desc, 'warn');
+      toast('天象 · ' + weather.name);
+    }
+    renderProgress();
+  }
+
+  function updateDayNight() {
+    var hour = new Date().getHours();
+    var night = hour >= 19 || hour < 6;
+    if (night === state.isNight) return;
+    state.isNight = night;
+    applyWeatherVisual();
+    renderProgress();
+    if (night) addLog('日入月升，夜间灵气更盛（灵气 +10%）。', 'warn');
+  }
+
   /* ---------------- 玩法逻辑 ---------------- */
 
   function doCultivate(event) {
@@ -1329,6 +1809,9 @@
   var saveTimer = 0;
   var cultivateTimer = 0;
   var achTimer = 0;
+  var petTimer = 0;
+  var weatherTimer = 0;
+  var dayTimer = 0;
   var display = { qi: 0, stones: 0, xiuwei: 0, ready: false };
 
   function tweenNumber(key, target, dt) {
@@ -1385,6 +1868,34 @@
       checkAchievements();
     }
 
+    var pet = currentPet();
+    if (pet && pet.auto > 0) {
+      petTimer += dt * 1000;
+      if (petTimer >= pet.auto) {
+        petTimer = 0;
+        var target = beastForState();
+        if (!state.beastHp || state.beastHp > target.maxHp) state.beastHp = target.maxHp;
+        var petDamage = attackPower() * pet.autoDamage;
+        state.beastHp -= petDamage;
+        spawnDamageNumber('灵宠 -' + fmt(petDamage), false, 2);
+        if (state.beastHp <= 0) {
+          state.beastHp = Math.min(1, target.maxHp * 0.01);
+        }
+        renderBattle();
+      }
+    }
+
+    weatherTimer += dt;
+    if (weatherTimer > 190) {
+      weatherTimer = 0;
+      rollWeather();
+    }
+    dayTimer += dt;
+    if (dayTimer > 45) {
+      dayTimer = 0;
+      updateDayNight();
+    }
+
     display.qi = tweenNumber('qi', state.qi, dt);
     display.stones = tweenNumber('stones', state.stones, dt);
     display.xiuwei = tweenNumber('xiuwei', state.xiuwei, dt);
@@ -1426,7 +1937,7 @@
     Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (tab) {
       tab.classList.toggle('active', tab.dataset.tab === name);
     });
-    ['cultivate', 'skills', 'pills', 'daily', 'grotto'].forEach(function (item) {
+    ['cultivate', 'skills', 'gear', 'pills', 'daily', 'grotto'].forEach(function (item) {
       document.getElementById('panel-' + item).classList.toggle('hidden', item !== name);
     });
   }
@@ -1440,6 +1951,7 @@
     { tab: 'cultivate', target: '#combatPanel', title: '斩妖历练', text: '点「御剑攻击」，或者直接点妖兽。击杀可拿灵石和修为；境界越高，妖兽越强也越值钱。参悟「心剑合一」后还能自动出剑。' },
     { tab: 'skills', target: '#skillList', title: '功法', text: '灵石在这里参悟功法：聚灵阵提高每秒灵气，御剑术提高剑意，悟道提高渡劫成功率，护身法阵让你持续获得灵石。' },
     { tab: 'pills', target: '#pillList', title: '丹药', text: '丹药用来应急：聚气丹立刻补灵气，破障丹让下一轮渡劫更容易成功，凝神丹让六十息内灵气翻倍。' },
+    { tab: 'gear', target: '#outfitGrid', title: '衣冠 · 换装与法宝', text: '这里可以换衣服、祭炼法宝、收服灵宠。不同装扮给不同加成（灵气 / 剑意 / 暴击），点场景里的主角形象也能直接打开衣柜。' },
     { tab: 'daily', target: '#questList', title: '日课', text: '每天四件小事：打坐、斩妖、升层、服丹。做完可领灵石和丹药，过了零点自动刷新。' },
     { tab: 'grotto', target: '#sectCard', title: '宗门', text: '拜入一个门派可以得到长期加护：青云宗加灵气、太虚剑派加剑意、丹霞谷省炼丹钱。斩妖和突破会积攒贡献，贡献能换职位。' },
     { tab: 'grotto', target: '#rankList', title: '天榜、道号与存档', text: '天榜按「道行」排名；下面的道号达成条件即解锁，给永久加成。修行途中会随机跳出「机缘」「危难」这类事件，不同选择结果不同。存档在你自己的浏览器里，换设备不同步；想再看一遍教程，点「重看新手教程」。' }
@@ -1539,6 +2051,7 @@
 
   function init() {
     ui = {
+      app: document.getElementById('app'),
       bgImage: document.getElementById('bgImage'),
       heroImage: document.getElementById('heroImage'),
       realmName: document.getElementById('realmName'),
@@ -1562,6 +2075,8 @@
       fxLayer: document.getElementById('fxLayer'),
       achLayer: document.getElementById('achLayer'),
       bossTag: document.getElementById('bossTag'),
+      weatherLayer: document.getElementById('weatherLayer'),
+      weatherChip: document.getElementById('weatherChip'),
       beastName: document.getElementById('beastName'),
       beastHpFill: document.getElementById('beastHpFill'),
       beastHpText: document.getElementById('beastHpText'),
@@ -1582,6 +2097,15 @@
       rankNote: document.getElementById('rankNote'),
       achList: document.getElementById('achList'),
       achCount: document.getElementById('achCount'),
+      outfitCurrent: document.getElementById('outfitCurrent'),
+      outfitGrid: document.getElementById('outfitGrid'),
+      outfitCount: document.getElementById('outfitCount'),
+      gearBonusText: document.getElementById('gearBonusText'),
+      equipList: document.getElementById('equipList'),
+      petList: document.getElementById('petList'),
+      wardrobe: document.getElementById('wardrobe'),
+      wardrobeGrid: document.getElementById('wardrobeGrid'),
+      wardrobeClose: document.getElementById('wardrobeClose'),
       tutDim: document.getElementById('tutDim'),
       tutTip: document.getElementById('tutTip'),
       tutTitle: document.getElementById('tutTitle'),
@@ -1626,6 +2150,15 @@
       }
     });
     document.getElementById('tutorialBtn').addEventListener('click', function () { startTutorial(); });
+    ui.heroImage.classList.add('tapable');
+    ui.heroImage.addEventListener('click', function () {
+      renderWardrobe();
+      ui.wardrobe.classList.remove('hidden');
+    });
+    ui.wardrobeClose.addEventListener('click', function () { ui.wardrobe.classList.add('hidden'); });
+    ui.wardrobe.addEventListener('click', function (event) {
+      if (event.target === ui.wardrobe) ui.wardrobe.classList.add('hidden');
+    });
     ui.tutNext.addEventListener('click', tutorialNext);
     ui.tutPrev.addEventListener('click', tutorialPrev);
     ui.tutSkip.addEventListener('click', function () { endTutorial(false); });
@@ -1649,6 +2182,8 @@
     state.beastHp = beastForState().maxHp;
     renderAll();
     setupHeroAnimation();
+    updateDayNight();
+    applyWeatherVisual();
 
     if (!state.tutorialDone && location.hash !== '#autotest') {
       setTimeout(function () {
@@ -1683,6 +2218,10 @@
     renderMiniLog();
     renderSkills();
     renderPills();
+    renderOutfit();
+    renderEquipment();
+    renderPets();
+    renderWeatherChip();
     renderDaily();
     renderSect();
     renderRank();
@@ -1760,6 +2299,21 @@
     state.pills['treasure-pill'] = 1;
     usePill('treasure-pill');
     step('pill_kinds', Object.keys(state.pills).length);
+
+    state.stones += 9000;
+    unlockOutfit('cloth');
+    wearOutfit('cloth');
+    step('outfit_equipped', state.outfit);
+    step('outfit_owned', state.outfits.length);
+    buyEquipment('sword', 'sword-1');
+    step('equip_sword', state.equipment.sword);
+    unlockPet('fox');
+    step('pet_active', state.pet);
+    step('gear_qi_bonus', Math.round(gearBonus().qi * 100));
+    step('gear_atk_bonus', Math.round(gearBonus().atk * 100));
+    rollWeather();
+    step('weather', currentWeather().name);
+    step('is_night', state.isNight);
 
     state.layer = realm().layers;
     state.xiuwei = layerRequirement();

@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "job_id": "job_4a61393c5f1448a7b8b89b199dc9b332",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\17-tex-paper\\泛黄的宣纸纹理_细密纤维与淡淡墨痕_古朴温和_可无缝平铺\\texture.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\17-tex-paper\\泛黄的宣纸纹理_细密纤维与淡淡墨痕_古朴温和_可无缝平铺\\step_20_tiling_preview.png",
+      "mime_type": "image/png"
+    }
+  ]
+}

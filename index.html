@@ -35,6 +35,8 @@
       <div class="bg-tint"></div>
       <div class="qi-particles" id="particles"></div>
       <div class="fx-layer" id="fxLayer"></div>
+      <div class="weather-layer" id="weatherLayer"></div>
+      <div class="weather-chip" id="weatherChip">晴空 · 昼</div>
 
       <div class="hero-wrap" id="heroWrap">
         <div class="hero-aura"></div>
@@ -88,6 +90,7 @@
     <nav class="tabs">
       <button class="tab active" data-tab="cultivate">修炼</button>
       <button class="tab" data-tab="skills">功法</button>
+      <button class="tab" data-tab="gear">衣冠</button>
       <button class="tab" data-tab="pills">丹药</button>
       <button class="tab" data-tab="daily">日课</button>
       <button class="tab" data-tab="grotto">洞天</button>
@@ -112,6 +115,18 @@
 
     <section class="panel hidden" id="panel-pills">
       <div class="list" id="pillList"></div>
+    </section>
+
+    <section class="panel hidden" id="panel-gear">
+      <div class="section-title">当前装扮 <span class="section-sub" id="gearBonusText"></span></div>
+      <div class="outfit-current" id="outfitCurrent"></div>
+      <div class="section-title">衣柜 <span class="section-sub" id="outfitCount"></span></div>
+      <div class="outfit-grid" id="outfitGrid"></div>
+      <div class="section-title">法宝</div>
+      <div class="list" id="equipList"></div>
+      <div class="section-title">灵宠</div>
+      <div class="list" id="petList"></div>
+      <p class="hint">点场景中的主角形象，也能打开衣柜快速换装。</p>
     </section>
 
     <section class="panel hidden" id="panel-daily">
@@ -169,6 +184,13 @@
       <p id="modalBody"></p>
       <div class="modal-choices hidden" id="modalChoices"></div>
       <button class="btn primary" id="modalOk">继续修行</button>
+    </div>
+  </div>
+  <div class="modal hidden" id="wardrobe">
+    <div class="modal-card wide">
+      <h2>衣冠 · 换装</h2>
+      <div class="outfit-grid" id="wardrobeGrid"></div>
+      <button class="btn primary" id="wardrobeClose">收好</button>
     </div>
   </div>
   <div class="thunder-layer" id="thunderLayer"></div>

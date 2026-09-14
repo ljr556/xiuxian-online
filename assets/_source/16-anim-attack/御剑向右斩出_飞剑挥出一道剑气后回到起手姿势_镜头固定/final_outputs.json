@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "job_id": "job_0522f61d03e646c2a7af028c818a76fa",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\16-anim-attack\\御剑向右斩出_飞剑挥出一道剑气后回到起手姿势_镜头固定\\result_output_url.webp",
+      "mime_type": "image/webp"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\16-anim-attack\\御剑向右斩出_飞剑挥出一道剑气后回到起手姿势_镜头固定\\result_output_transparent_output_urls_gif.gif",
+      "mime_type": "image/gif"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\16-anim-attack\\御剑向右斩出_飞剑挥出一道剑气后回到起手姿势_镜头固定\\result_output_transparent_output_urls_png.png",
+      "mime_type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "job_id": "job_fb1eeffbcf2f43a2bd8a5f03559dfa83",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\14-outfit-immortal\\身着金边白袍的仙尊_衣袍泛着微光_气质出尘_正面端立\\sprite_00.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\14-outfit-immortal\\身着金边白袍的仙尊_衣袍泛着微光_气质出尘_正面端立\\sprite_01.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\14-outfit-immortal\\身着金边白袍的仙尊_衣袍泛着微光_气质出尘_正面端立\\sprite_pack_preview.png",
+      "mime_type": "image/png"
+    }
+  ]
+}

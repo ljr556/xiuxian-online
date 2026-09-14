@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "job_id": "job_b45b34dcc4344b96b0f3d67ff0b77f52",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\13-outfit-demonic\\身着紫黑魔道袍的年轻修士_银纹缭绕_披风垂落_神情冷峻_正面端立\\sprite_00.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\13-outfit-demonic\\身着紫黑魔道袍的年轻修士_银纹缭绕_披风垂落_神情冷峻_正面端立\\sprite_01.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\13-outfit-demonic\\身着紫黑魔道袍的年轻修士_银纹缭绕_披风垂落_神情冷峻_正面端立\\sprite_pack_preview.png",
+      "mime_type": "image/png"
+    }
+  ]
+}

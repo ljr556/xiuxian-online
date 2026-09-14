@@ -472,11 +472,195 @@ button, .tab, .card button, .cultivate-btn {
   background: transparent;
   color: var(--text-dim);
   font-family: inherit;
-  font-size: 13px;
-  letter-spacing: 1px;
+  font-size: 12.5px;
+  letter-spacing: 0;
   cursor: pointer;
   border-bottom: 2px solid transparent;
 }
+
+.weather-chip {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  z-index: 6;
+  padding: 3px 9px;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 162, 74, 0.4);
+  background: rgba(10, 18, 16, 0.72);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--gold-light);
+}
+
+.weather-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.weather-layer .rain {
+  position: absolute;
+  inset: -20%;
+  background-image: repeating-linear-gradient(105deg, rgba(185, 214, 232, 0.22) 0 1px, transparent 1px 13px);
+  animation: rainFall 0.7s linear infinite;
+  opacity: 0.34;
+}
+
+@keyframes rainFall {
+  from { transform: translateY(-40px); }
+  to { transform: translateY(40px); }
+}
+
+.weather-layer .wind {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(0deg, rgba(200, 230, 220, 0.2) 0 1px, transparent 1px 24px);
+  animation: windDrift 3.6s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes windDrift {
+  from { transform: translateX(-28px); }
+  to { transform: translateX(28px); }
+}
+
+.weather-layer .storm { position: absolute; inset: 0; background: rgba(40, 50, 90, 0.22); }
+
+.weather-layer .storm.flash { animation: stormFlash 0.35s steps(2) 3; }
+
+@keyframes stormFlash {
+  50% { background: rgba(180, 200, 255, 0.5); }
+}
+
+#app.night .stage { filter: brightness(0.8) saturate(0.92); }
+
+#app.night .bg-tint {
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(10,16,40,0) 35%, rgba(8,12,30,0.5) 100%),
+    linear-gradient(180deg, rgba(10, 16, 42, 0.5) 0%, rgba(8, 12, 30, 0.18) 45%, rgba(6, 10, 22, 0.9) 100%);
+}
+
+.outfit-current {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(201, 162, 74, 0.35);
+  background: linear-gradient(180deg, rgba(26, 40, 36, 0.92), rgba(12, 20, 18, 0.95));
+}
+
+.outfit-current img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex: none;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.outfit-current .oc-body { min-width: 0; }
+.outfit-current h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--gold-light);
+}
+.outfit-current .rarity {
+  display: inline-block;
+  font-size: 10.5px;
+  padding: 1px 7px;
+  border-radius: 3px;
+  border: 1px solid rgba(201, 162, 74, 0.5);
+  color: var(--gold-light);
+}
+.outfit-current p {
+  margin: 7px 0 0;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+.outfit-current .bonus { margin-top: 6px; font-size: 11.5px; color: var(--jade-light); }
+
+.outfit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.outfit-card {
+  padding: 8px 6px 7px;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 162, 74, 0.25);
+  background: rgba(14, 22, 20, 0.82);
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.outfit-card img {
+  width: 100%;
+  max-height: 74px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.outfit-card .name { display: block; font-size: 11.5px; color: var(--text); margin-top: 4px; }
+.outfit-card .tagline { display: block; font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+.outfit-card.locked img { filter: grayscale(1) brightness(0.5); }
+.outfit-card.locked .tagline { color: #e0b567; }
+.outfit-card.owned { border-color: rgba(111, 179, 154, 0.5); }
+.outfit-card.equipped {
+  border-color: var(--gold-light);
+  background: linear-gradient(180deg, rgba(60, 84, 70, 0.9), rgba(18, 30, 26, 0.92));
+  box-shadow: 0 0 14px rgba(240, 214, 138, 0.4);
+}
+
+.modal-card.wide { width: min(94vw, 430px); }
+
+.modal-card .outfit-grid { margin-bottom: 14px; }
+
+.hero.tapable { cursor: pointer; }
+
+.hero.switching { animation: heroSwitch 0.6s ease-out; }
+
+@keyframes heroSwitch {
+  0% { filter: brightness(3) saturate(0); transform: scale(1.06); }
+  60% { filter: brightness(1.3); }
+  100% { filter: none; transform: scale(1); }
+}
+
+.battle-meta .crit-info { color: var(--jade-light); }
+
+.equip-card .equip-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.equip-card .equip-lines .has { color: var(--gold-light); }
+
+.equip-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.equip-btns button {
+  padding: 5px 11px;
+  border-radius: 4px;
+  border: 1px solid rgba(201, 162, 74, 0.4);
+  background: rgba(26, 40, 37, 0.9);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.equip-btns button:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .daily-head {
   display: flex;
@@ -1149,4 +1333,51 @@ button, .tab, .card button, .cultivate-btn {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
   75% { transform: translateX(5px); }
+}
+
+/* ---------- 材质底纹（Meowa 生成的可平铺纹理） ---------- */
+.topbar,
+.tabs {
+  background-image:
+    linear-gradient(180deg, rgba(10, 18, 17, 0.9), rgba(8, 14, 13, 0.87)),
+    url("assets/ui/wood.png");
+  background-size: auto, 64px 64px;
+  background-repeat: no-repeat, repeat;
+  background-blend-mode: normal, soft-light;
+}
+
+.card,
+.outfit-current,
+.sect-card,
+.rank-list,
+.log,
+.mini-log,
+.modal-card,
+.battle-side {
+  background-image:
+    linear-gradient(180deg, rgba(22, 34, 31, 0.95), rgba(12, 20, 18, 0.97)),
+    url("assets/ui/paper.png");
+  background-size: auto, 64px 64px;
+  background-repeat: no-repeat, repeat;
+  background-blend-mode: normal, soft-light;
+}
+
+.panel {
+  background-image:
+    linear-gradient(180deg, rgba(12, 20, 19, 0.8), rgba(10, 16, 15, 0.88)),
+    url("assets/ui/paper.png");
+  background-size: auto, 96px 96px;
+  background-repeat: no-repeat, repeat;
+  background-blend-mode: normal, soft-light;
+}
+
+.outfit-card,
+.quest,
+.equip-card {
+  background-image:
+    linear-gradient(180deg, rgba(20, 30, 28, 0.95), rgba(12, 19, 18, 0.97)),
+    url("assets/ui/paper.png");
+  background-size: auto, 48px 48px;
+  background-repeat: no-repeat, repeat;
+  background-blend-mode: normal, soft-light;
 }

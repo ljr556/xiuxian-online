@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "job_id": "job_a5c42957162e4f958da6b58d11340acd",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\15-outfit-cloth\\身着青色布衣短打的年轻修士_束腰利落_朴素清苦_正面端立\\sprite_00.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\15-outfit-cloth\\身着青色布衣短打的年轻修士_束腰利落_朴素清苦_正面端立\\sprite_01.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\15-outfit-cloth\\身着青色布衣短打的年轻修士_束腰利落_朴素清苦_正面端立\\sprite_pack_preview.png",
+      "mime_type": "image/png"
+    }
+  ]
+}

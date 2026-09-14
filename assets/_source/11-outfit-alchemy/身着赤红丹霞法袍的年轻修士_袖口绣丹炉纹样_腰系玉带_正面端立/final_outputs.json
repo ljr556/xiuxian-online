@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "job_id": "job_c3beda66c04e4f16a305cf58efb18238",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\11-outfit-alchemy\\身着赤红丹霞法袍的年轻修士_袖口绣丹炉纹样_腰系玉带_正面端立\\sprite_00.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\11-outfit-alchemy\\身着赤红丹霞法袍的年轻修士_袖口绣丹炉纹样_腰系玉带_正面端立\\sprite_01.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\11-outfit-alchemy\\身着赤红丹霞法袍的年轻修士_袖口绣丹炉纹样_腰系玉带_正面端立\\sprite_pack_preview.png",
+      "mime_type": "image/png"
+    }
+  ]
+}

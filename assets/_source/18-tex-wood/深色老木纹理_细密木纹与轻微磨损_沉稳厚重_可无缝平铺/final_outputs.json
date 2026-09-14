@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "job_id": "job_64db5ea3f989453aa180a9857e4270d8",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\18-tex-wood\\深色老木纹理_细密木纹与轻微磨损_沉稳厚重_可无缝平铺\\texture.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\18-tex-wood\\深色老木纹理_细密木纹与轻微磨损_沉稳厚重_可无缝平铺\\step_20_tiling_preview.png",
+      "mime_type": "image/png"
+    }
+  ]
+}
