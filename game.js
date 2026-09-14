@@ -1211,11 +1211,11 @@
     void ui.beastImage.offsetWidth;
     ui.beastImage.classList.add('hurt');
     playAttackFx();
-    damages.forEach(function (hit, index) {
-      setTimeout(function () {
-        spawnDamageNumber((hit.crit ? '暴击 ' : '') + '-' + fmt(hit.value), hit.crit, index);
-      }, index * 80);
-    });
+    if (hits > 1) {
+      spawnDamageNumber((crit ? '暴击 ' : '') + '×' + hits + ' -' + fmt(total), crit);
+    } else {
+      spawnDamageNumber((crit ? '暴击 ' : '') + '-' + fmt(total), crit);
+    }
     if (crit) {
       ui.stage.classList.remove('shake-soft');
       void ui.stage.offsetWidth;
