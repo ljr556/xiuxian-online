@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "job_id": "job_f4684db3095c4a9896f21e71f5c0081f",
+  "outputs": [
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\19-junior-sister\\一位身着淡青色衣裙的年轻女修_手持玉笛_神情温婉_正面端立\\sprite_00.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\19-junior-sister\\一位身着淡青色衣裙的年轻女修_手持玉笛_神情温婉_正面端立\\sprite_01.png",
+      "mime_type": "image/png"
+    },
+    {
+      "type": "media",
+      "path": "C:\\Users\\18223\\Documents\\Codex\\2026-09-14\\npx-skills-add-https-github-com\\outputs\\xiuxian-online\\assets\\_source\\19-junior-sister\\一位身着淡青色衣裙的年轻女修_手持玉笛_神情温婉_正面端立\\sprite_pack_preview.png",
+      "mime_type": "image/png"
+    }
+  ]
+}

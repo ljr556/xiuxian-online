@@ -1381,3 +1381,50 @@ button, .tab, .card button, .cultivate-btn {
   background-repeat: no-repeat, repeat;
   background-blend-mode: normal, soft-light;
 }
+
+/* ---------- 灵根 / 矿脉 / 师妹 ---------- */
+.root-card {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(201, 162, 74, 0.35);
+  background-image:
+    linear-gradient(180deg, rgba(22, 34, 31, 0.95), rgba(12, 20, 18, 0.97)),
+    url("assets/ui/paper.png");
+  background-size: auto, 64px 64px;
+  background-repeat: no-repeat, repeat;
+  background-blend-mode: normal, soft-light;
+}
+
+.root-line { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.root-name { font-size: 16px; letter-spacing: 2px; color: var(--gold-light); }
+.root-desc { font-size: 11.5px; color: var(--text-dim); }
+.root-bonus { margin-top: 6px; font-size: 12px; color: var(--jade-light); }
+
+.root-card .card-foot {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.root-card button,
+#mineCard button {
+  padding: 6px 13px;
+  border-radius: 4px;
+  border: 1px solid rgba(111, 179, 154, 0.55);
+  background: rgba(38, 72, 61, 0.9);
+  color: #e7f5ee;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.root-card button:disabled,
+#mineCard button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.card.sister { align-items: flex-start; }
+.card.sister > img { width: 76px; height: 76px; align-self: center; }
+
+.card.sister .quest-bar { margin: 6px 0; }

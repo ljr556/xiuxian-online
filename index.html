@@ -92,7 +92,7 @@
       <button class="tab" data-tab="skills">功法</button>
       <button class="tab" data-tab="gear">衣冠</button>
       <button class="tab" data-tab="pills">丹药</button>
-      <button class="tab" data-tab="daily">日课</button>
+      <button class="tab" data-tab="quests">任务</button>
       <button class="tab" data-tab="grotto">洞天</button>
     </nav>
 
@@ -103,6 +103,10 @@
         <span class="cb-sub" id="cultivateGain">+1 灵气</span>
       </button>
       <p class="hint">点击打坐吸纳灵气，灵气化为修为。修为圆满即可突破境界。</p>
+      <div class="section-title">灵根 <span class="section-sub">开局随机 · 可洗髓更换</span></div>
+      <div class="root-card" id="rootCard"></div>
+      <div class="section-title">灵矿脉 <span class="section-sub">开采得灵石与灵矿</span></div>
+      <div class="card" id="mineCard"></div>
       <div class="section-title">境界阶梯</div>
       <div class="ladder" id="realmLadder"></div>
       <div class="section-title">近事</div>
@@ -110,6 +114,8 @@
     </section>
 
     <section class="panel hidden" id="panel-skills">
+      <div class="section-title">境界神通 <span class="section-sub" id="skillTreeCount"></span></div>
+      <div class="ach-list" id="skillTree"></div>
       <div class="list" id="skillList"></div>
     </section>
 
@@ -129,17 +135,23 @@
       <p class="hint">点场景中的主角形象，也能打开衣柜快速换装。</p>
     </section>
 
-    <section class="panel hidden" id="panel-daily">
+    <section class="panel hidden" id="panel-quests">
+      <div class="section-title">师徒主线 <span class="section-sub" id="mainQuestCount"></span></div>
+      <div class="card quest" id="mainQuestCard"></div>
+      <div class="section-title">历练支线 <span class="section-sub">完成即刷新</span></div>
+      <div class="list" id="sideList"></div>
       <div class="section-title">今日日课</div>
       <div class="daily-head">
         <span id="dailyDate"></span>
         <span id="dailyProgress"></span>
       </div>
       <div class="list" id="questList"></div>
-      <p class="hint">日课每日零时重置，完成即可领取灵石与丹药。</p>
+      <p class="hint">日课每日零时重置；师徒主线按章节推进；历练支线完成一条立刻补一条。</p>
     </section>
 
     <section class="panel hidden" id="panel-grotto">
+      <div class="section-title">师妹 · 苏青瑶 <span class="section-sub" id="sisterFavor"></span></div>
+      <div class="card sister" id="sisterCard"></div>
       <div class="section-title">宗门</div>
       <div class="sect-card" id="sectCard"></div>
       <div class="section-title">天榜 · 道行排行</div>
