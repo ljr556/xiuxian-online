@@ -356,11 +356,20 @@ button, .tab, .card button, .cultivate-btn {
 /* ---------- 战斗 ---------- */
 .combat {
   display: flex;
+  position: relative;
   gap: 10px;
   padding: 10px 12px;
   flex: none;
   border-bottom: 1px solid rgba(201,162,74,0.22);
   background: linear-gradient(180deg, rgba(18,28,26,0.75), rgba(12,20,19,0.9));
+}
+
+.dmg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 6;
 }
 
 .beast-side {
@@ -568,6 +577,36 @@ button, .tab, .card button, .cultivate-btn {
 
 .rank-note { font-size: 11px; color: #6b746f; margin: 8px 2px 0; line-height: 1.7; }
 
+.section-sub { float: right; font-size: 10.5px; color: var(--text-dim); letter-spacing: 0; }
+
+.ach-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.ach-list span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(201, 162, 74, 0.22);
+  background: rgba(12, 20, 19, 0.6);
+  font-size: 11.5px;
+  color: #7f8a84;
+}
+
+.ach-list span.owned {
+  color: var(--gold-light);
+  border-color: rgba(240, 214, 138, 0.6);
+  background: linear-gradient(180deg, rgba(60, 84, 70, 0.85), rgba(18, 30, 26, 0.9));
+  box-shadow: 0 0 10px rgba(240, 214, 138, 0.22);
+}
+
+.ach-list span em {
+  font-style: normal;
+  font-size: 10px;
+  color: var(--jade-light);
+  opacity: 0.85;
+}
+
 .tab.active {
   color: var(--gold-light);
   border-bottom-color: var(--gold);
@@ -733,6 +772,197 @@ button, .tab, .card button, .cultivate-btn {
   font-size: 10.5px;
   color: #6b746f;
   text-align: center;
+}
+
+/* ---------- 新手教程 ---------- */
+.fx-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.ripple {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  border: 2px solid rgba(167, 227, 200, 0.9);
+  animation: rippleOut 0.75s ease-out forwards;
+}
+
+@keyframes rippleOut {
+  0% { opacity: 0.95; transform: scale(0.35); }
+  100% { opacity: 0; transform: scale(3.2); }
+}
+
+.spark {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f0d68a, rgba(240, 214, 138, 0));
+  animation: sparkFly 0.7s ease-out forwards;
+}
+
+@keyframes sparkFly {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.4); }
+}
+
+.float-text.crit {
+  color: #ffd479;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 180, 60, 0.95), 0 2px 4px #000;
+}
+
+.float-text.hurt-num {
+  color: #f0a58a;
+  font-size: 14px;
+}
+
+.stage.shake-soft { animation: shakeSoft 0.22s ease-in-out 2; }
+@keyframes shakeSoft {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+}
+
+.levelup-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 20%, rgba(240, 214, 138, 0.55) 48%, transparent 72%);
+  animation: sweepAcross 0.85s ease-out forwards;
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes sweepAcross {
+  0% { opacity: 0; transform: translateX(-70%); }
+  35% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateX(70%); }
+}
+
+.bar-fill.full {
+  animation: barGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes barGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(111, 179, 154, 0.7); }
+  50% { box-shadow: 0 0 20px rgba(240, 214, 138, 0.95); }
+}
+
+.panel.fade-in { animation: panelIn 0.28s ease-out; }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ach-layer {
+  position: fixed;
+  top: calc(10px + env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 90;
+  pointer-events: none;
+  width: min(92vw, 430px);
+}
+
+.ach-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(240, 214, 138, 0.75);
+  background: linear-gradient(180deg, rgba(38, 56, 48, 0.97), rgba(14, 22, 20, 0.98));
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.6), 0 0 18px rgba(240, 214, 138, 0.35);
+  animation: bannerIn 0.45s cubic-bezier(0.2, 1.3, 0.4, 1), bannerOut 0.4s ease-in 4.2s forwards;
+}
+
+@keyframes bannerIn {
+  from { opacity: 0; transform: translateY(-18px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes bannerOut {
+  to { opacity: 0; transform: translateY(-12px); }
+}
+
+.ach-banner img {
+  width: 30px;
+  height: 30px;
+  image-rendering: pixelated;
+  flex: none;
+}
+
+.ach-banner .ach-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ach-banner .ach-kicker { font-size: 10.5px; letter-spacing: 2px; color: var(--gold-light); }
+.ach-banner .ach-name { font-size: 14px; color: var(--paper); }
+.ach-banner .ach-bonus { font-size: 10.5px; color: var(--jade-light); }
+
+.beast.boss {
+  width: 102px;
+  height: 102px;
+  filter: drop-shadow(0 0 10px rgba(200, 60, 50, 0.8));
+}
+
+.beast.boss.hurt { animation: beastHurt 0.28s ease-out; }
+
+.boss-tag {
+  font-size: 10.5px;
+  color: #ff9b8a;
+  letter-spacing: 1px;
+}
+
+.modal { animation: modalFade 0.22s ease-out; }
+@keyframes modalFade { from { opacity: 0; } }
+
+.modal-card { animation: modalPop 0.3s cubic-bezier(0.2, 1.25, 0.4, 1); }
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.92) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.modal-choices button {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 162, 74, 0.45);
+  background: rgba(26, 40, 37, 0.95);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.modal-choices button:hover { border-color: var(--gold-light); }
+.modal-choices button span { display: block; font-size: 11px; color: var(--text-dim); margin-top: 3px; }
+
+.event-tag {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid rgba(201, 162, 74, 0.5);
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  color: var(--gold-light);
 }
 
 /* ---------- 新手教程 ---------- */

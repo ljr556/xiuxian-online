@@ -64,6 +64,42 @@
       desc: '剑随心走，可让飞剑自行斩妖（自动攻击）。',
       cost: function (lv) { return Math.floor(120 * Math.pow(2.1, lv)); },
       effect: function (lv) { return lv > 0 ? '自动攻击 每 ' + (1.6 - Math.min(0.9, lv * 0.15)).toFixed(2) + ' 秒' : '未开启'; }
+    },
+    {
+      id: 'root', name: '灵根淬炼', icon: 'icon_mountain.png',
+      desc: '重塑五行灵根，整体提升灵气产出。',
+      cost: function (lv) { return Math.floor(240 * Math.pow(2.0, lv)); },
+      effect: function (lv) { return '灵气产出 +' + (lv * 8) + '%'; }
+    },
+    {
+      id: 'sense', name: '神识', icon: 'icon_talisman.png',
+      desc: '神识愈强，出手越容易击中要害。',
+      cost: function (lv) { return Math.floor(180 * Math.pow(1.9, lv)); },
+      effect: function (lv) { return '暴击 ' + Math.round(critChance(lv) * 100) + '%'; }
+    },
+    {
+      id: 'formation', name: '剑阵', icon: 'icon_sword.png',
+      desc: '布下剑阵，每次出手多飞出一道飞剑。',
+      cost: function (lv) { return Math.floor(420 * Math.pow(2.1, lv)); },
+      effect: function (lv) { return '每击 ' + (1 + lv) + ' 段'; }
+    },
+    {
+      id: 'escape', name: '遁术', icon: 'icon_wind.png',
+      desc: '遁法通玄，离山闭关时收益更高。',
+      cost: function (lv) { return Math.floor(320 * Math.pow(1.95, lv)); },
+      effect: function (lv) { return '离线收益 ' + Math.round(offlineRate(lv) * 100) + '%'; }
+    },
+    {
+      id: 'enlighten', name: '天机', icon: 'icon_time.png',
+      desc: '参透天机，即便不出手也会自行吐纳。',
+      cost: function (lv) { return Math.floor(900 * Math.pow(2.2, lv)); },
+      effect: function (lv) { return lv > 0 ? '自动吐纳 每 ' + (1.8 - Math.min(1.0, lv * 0.2)).toFixed(1) + ' 秒' : '未开启'; }
+    },
+    {
+      id: 'pillcraft', name: '丹道', icon: 'icon_cauldron.png',
+      desc: '丹道精进，所有丹药效果大幅提升。',
+      cost: function (lv) { return Math.floor(560 * Math.pow(2.05, lv)); },
+      effect: function (lv) { return '丹药效果 +' + (lv * 20) + '%'; }
     }
   ];
 
@@ -82,6 +118,95 @@
       id: 'spirit-pill', name: '凝神丹', icon: 'icon_cauldron.png',
       desc: '服下后 60 秒内灵气产出翻倍。',
       cost: function () { return { stones: 60, qi: 500 }; }
+    },
+    {
+      id: 'clear-pill', name: '太清丹', icon: 'icon_talisman.png',
+      desc: '服下后 60 秒内暴击率翻倍。',
+      cost: function () { return { stones: 90, qi: 900 }; }
+    },
+    {
+      id: 'wombo-pill', name: '悟道丹', icon: 'icon_thunder.png',
+      desc: '服下后立刻获得当前层所需修为的 35%。',
+      cost: function () { return { stones: 140, qi: 1600 }; }
+    },
+    {
+      id: 'treasure-pill', name: '聚宝丹', icon: 'icon_chest.png',
+      desc: '服下后立刻获得相当于 60 秒产出的灵石。',
+      cost: function () { return { stones: 80, qi: 700 }; }
+    }
+  ];
+
+  var ACHIEVEMENTS = [
+    { id: 'first', name: '初入仙途', desc: '第一次打坐吐纳', qi: 0.02, atk: 0, check: function () { return state.records.totalClicks >= 1; } },
+    { id: 'clicks300', name: '勤修不辍', desc: '累计打坐 300 次', qi: 0.04, atk: 0, check: function () { return state.records.totalClicks >= 300; } },
+    { id: 'kills10', name: '初试锋芒', desc: '累计斩妖 10 只', qi: 0, atk: 0.04, check: function () { return state.records.totalKills >= 10; } },
+    { id: 'kills100', name: '斩妖百只', desc: '累计斩妖 100 只', qi: 0, atk: 0.08, check: function () { return state.records.totalKills >= 100; } },
+    { id: 'boss1', name: '妖王伏诛', desc: '击败第一位妖王', qi: 0.03, atk: 0.10, check: function () { return state.bossKills >= 1; } },
+    { id: 'boss5', name: '镇妖尊者', desc: '击败五位妖王', qi: 0.05, atk: 0.12, check: function () { return state.bossKills >= 5; } },
+    { id: 'realm3', name: '金丹大道', desc: '修炼到金丹境', qi: 0.06, atk: 0, check: function () { return state.realm >= 2; } },
+    { id: 'realm6', name: '炼虚之境', desc: '修炼到炼虚境', qi: 0.12, atk: 0.05, check: function () { return state.realm >= 5; } },
+    { id: 'sect', name: '宗门中人', desc: '拜入任意宗门', qi: 0.03, atk: 0, check: function () { return !!state.sect.id; } },
+    { id: 'daily', name: '日课圆满', desc: '一天内领完 4 件日课', qi: 0.05, atk: 0, check: function () { return state.dailyDone; } },
+    { id: 'lifetime', name: '道行千里', desc: '累计修为达到 10 万', qi: 0.10, atk: 0, check: function () { return state.records.lifetime >= 100000; } },
+    { id: 'lifetime2', name: '道行万载', desc: '累计修为达到 1 亿', qi: 0.20, atk: 0.10, check: function () { return state.records.lifetime >= 1e8; } }
+  ];
+
+  var EVENTS = [
+    {
+      id: 'rain', tag: '天象', title: '灵雨降世', text: '乌云化雨，山间灵气骤然浓郁。',
+      choices: [
+        { label: '运功吸纳', hint: '获得大量灵气', run: function () { var g = Math.max(30, qiPerSec() * 45); state.qi += g; return '灵气 +' + fmt(g); } },
+        { label: '汲取灵泉', hint: '换成灵石', run: function () { var g = Math.max(20, stonesPerSec() * 60 + 25 + state.realm * 18); state.stones += g; return '灵石 +' + fmt(g); } }
+      ]
+    },
+    {
+      id: 'cave', tag: '机缘', title: '山中古洞', text: '岩壁上露出一座荒废洞府，石门半开。',
+      choices: [
+        { label: '入洞探查', hint: '可能得丹药，也可能受伤', run: function () { if (Math.random() < 0.65) { var pill = PILLS[Math.floor(Math.random() * PILLS.length)].id; state.pills[pill] = (state.pills[pill] || 0) + 1; return '寻得一枚丹药'; } var lose = Math.floor(state.xiuwei * 0.18); state.xiuwei -= lose; return '触动禁制，修为 -' + fmt(lose); } },
+        { label: '绕道而行', hint: '稳妥获得修为', run: function () { var g = Math.max(40, qiPerSec() * 30); gainXiuwei(g); return '修为 +' + fmt(g); } }
+      ]
+    },
+    {
+      id: 'raid', tag: '危难', title: '妖兽袭山', text: '一头妖王带着妖气逼近洞府。',
+      choices: [
+        { label: '迎战', hint: '立刻与妖王一战', run: function () { state.beastHp = 0; state.forceBoss = true; return '妖王已至，动手吧'; } },
+        { label: '闭门静守', hint: '损失少许修为换取灵石', run: function () { var lose = Math.floor(state.xiuwei * 0.06); state.xiuwei -= lose; state.stones += 60 + state.realm * 40; return '灵石 +' + fmt(60 + state.realm * 40); } }
+      ]
+    },
+    {
+      id: 'wanderer', tag: '人情', title: '过路散修', text: '一位散修在洞府外盘桓，似有所求。',
+      choices: [
+        { label: '交换心得', hint: '得到修为', run: function () { var g = Math.max(60, qiPerSec() * 40); gainXiuwei(g); return '修为 +' + fmt(g); } },
+        { label: '赠以灵石', hint: '消耗灵石换宗门贡献', run: function () { var cost = Math.min(state.stones, 80 + state.realm * 50); state.stones -= cost; state.sect.contribution += 25; return '贡献 +25（耗费灵石 ' + fmt(cost) + '）'; } }
+      ]
+    },
+    {
+      id: 'demon', tag: '心劫', title: '心魔滋生', text: '闭关日久，潜意识里的杂念凝成心魔。',
+      choices: [
+        { label: '以剑斩之', hint: '耗费灵气，换来大量修为', run: function () { var cost = Math.min(state.qi, qiPerSec() * 40 + 50); state.qi -= cost; var g = Math.max(80, qiPerSec() * 70); gainXiuwei(g); return '修为 +' + fmt(g); } },
+        { label: '静心调息', hint: '小幅收益但更稳', run: function () { var g = Math.max(25, qiPerSec() * 18); gainXiuwei(g); return '修为 +' + fmt(g); } }
+      ]
+    },
+    {
+      id: 'thunder', tag: '天象', title: '天雷淬体', text: '一道紫色雷光落在峰顶，正好可以借来淬炼肉身。',
+      choices: [
+        { label: '引雷淬体', hint: '损失修为，短时增伤', run: function () { var lose = Math.floor(state.xiuwei * 0.1); state.xiuwei -= lose; state.buffs.critBoost = 90; return '九十息内暴击翻倍（修为 -' + fmt(lose) + '）'; } },
+        { label: '远远观望', hint: '收集雷石', run: function () { state.stones += 120 + state.realm * 60; return '灵石 +' + fmt(120 + state.realm * 60); } }
+      ]
+    },
+    {
+      id: 'market', tag: '世俗', title: '坊市开张', text: '山下坊市热闹，丹药与符箓都有买卖。',
+      choices: [
+        { label: '买些药材', hint: '花灵石换丹药', run: function () { var cost = Math.min(state.stones, 70 + state.realm * 30); state.stones -= cost; var pill = ['qi-pill', 'break-pill', 'spirit-pill'][Math.floor(Math.random() * 3)]; state.pills[pill] = (state.pills[pill] || 0) + 1; return '得一枚丹药（耗费灵石 ' + fmt(cost) + '）'; } },
+        { label: '卖几张符箓', hint: '换成灵石', run: function () { state.stones += 140 + state.realm * 55; return '灵石 +' + fmt(140 + state.realm * 55); } }
+      ]
+    },
+    {
+      id: 'ruin', tag: '机缘', title: '前辈遗府', text: '云海深处现出一座上古修士的遗府。',
+      choices: [
+        { label: '破阵而入', hint: '消耗灵气，收获灵石', run: function () { var cost = Math.min(state.qi, qiPerSec() * 50); state.qi -= cost; var g = Math.max(150, stonesPerSec() * 120 + 150 + state.realm * 90); state.stones += g; return '灵石 +' + fmt(g); } },
+        { label: '焚香祭拜', hint: '得到宗门贡献与修为', run: function () { state.sect.contribution += 40; var g = Math.max(60, qiPerSec() * 35); gainXiuwei(g); return '贡献 +40，修为 +' + fmt(g); } }
+      ]
     }
   ];
 
@@ -154,7 +279,8 @@
     var base = 0.35 + state.realm * 0.9;
     var fromArray = techLevel('array') * 0.6;
     var mult = state.buffs.qiMult > 0 ? 2 : 1;
-    return (base + fromArray) * mult * sectQiMult();
+    return (base + fromArray) * mult * sectQiMult()
+      * (1 + techLevel('root') * 0.08) * (1 + achBonuses().qi);
   }
 
   function stonesPerSec() {
@@ -166,7 +292,8 @@
   }
 
   function attackPower() {
-    return Math.round((5 + techLevel('sword') * 4 + state.realm * 6) * sectAttackMult());
+    return Math.round((5 + techLevel('sword') * 4 + state.realm * 6)
+      * sectAttackMult() * (1 + achBonuses().atk));
   }
 
   function autoInterval() {
@@ -218,6 +345,48 @@
     return state.records.lifetime;
   }
 
+  function critChance(levelOverride) {
+    var lv = typeof levelOverride === 'number' ? levelOverride : techLevel('sense');
+    var base = 0.05 + lv * 0.03 + state.realm * 0.005;
+    if (state.buffs.critBoost > 0) base *= 2;
+    return Math.max(0.05, Math.min(0.65, base));
+  }
+
+  function critMultiplier() {
+    return 1.8 + state.realm * 0.05;
+  }
+
+  function hitCount() {
+    return 1 + techLevel('formation');
+  }
+
+  function offlineRate(levelOverride) {
+    var lv = typeof levelOverride === 'number' ? levelOverride : techLevel('escape');
+    return Math.min(1, OFFLINE_RATE + lv * 0.06);
+  }
+
+  function autoCultivateInterval() {
+    var lv = techLevel('enlighten');
+    if (lv <= 0) return 0;
+    return (1.8 - Math.min(1.0, lv * 0.2)) * 1000;
+  }
+
+  function pillPower() {
+    return 1 + techLevel('pillcraft') * 0.2;
+  }
+
+  function achBonuses() {
+    var qi = 0;
+    var atk = 0;
+    ACHIEVEMENTS.forEach(function (item) {
+      if (state.achievements.indexOf(item.id) >= 0) {
+        qi += item.qi;
+        atk += item.atk;
+      }
+    });
+    return { qi: qi, atk: atk };
+  }
+
   function todayKey() {
     var d = new Date();
     return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -244,11 +413,20 @@
     var idx = Math.min(BEASTS.length - 1, state.realm + Math.floor(state.layer / 4));
     var b = BEASTS[idx];
     var hpMult = Math.pow(1.5, Math.max(0, state.realm - idx)) * (1 + state.layer * 0.08);
+    var stones = Math.floor(b.stones * Math.pow(1.35, Math.max(0, state.realm - idx)));
+    var xiuwei = Math.floor(b.xiuwei * Math.pow(1.4, Math.max(0, state.realm - idx)));
+    var isBoss = state.forceBoss || state.sinceBoss >= 9;
+    if (isBoss) {
+      hpMult *= 7;
+      stones *= 9;
+      xiuwei *= 8;
+    }
     return {
-      name: b.name,
+      name: (isBoss ? '妖王 · ' : '') + b.name,
+      boss: isBoss,
       maxHp: Math.floor(b.hp * hpMult),
-      stones: Math.floor(b.stones * Math.pow(1.35, Math.max(0, state.realm - idx))),
-      xiuwei: Math.floor(b.xiuwei * Math.pow(1.4, Math.max(0, state.realm - idx)))
+      stones: stones,
+      xiuwei: xiuwei
     };
   }
 
@@ -271,9 +449,14 @@
       stones: 30,
       pills: { 'qi-pill': 0, 'break-pill': 0, 'spirit-pill': 0 },
       techs: {},
-      buffs: { breakBonus: 0, qiMult: 0 },
+      buffs: { breakBonus: 0, qiMult: 0, critBoost: 0 },
       beastHp: 0,
       beastKills: 0,
+      bossKills: 0,
+      sinceBoss: 0,
+      forceBoss: false,
+      achievements: [],
+      dailyDone: false,
       autoBattle: true,
       breakthroughs: 0,
       failures: 0,
@@ -315,7 +498,7 @@
     try {
       var data = JSON.parse(raw);
       state = Object.assign(defaultState(), data);
-      state.buffs = Object.assign({ breakBonus: 0, qiMult: 0 }, data.buffs || {});
+      state.buffs = Object.assign({ breakBonus: 0, qiMult: 0, critBoost: 0 }, data.buffs || {});
       state.pills = Object.assign({ 'qi-pill': 0, 'break-pill': 0, 'spirit-pill': 0 }, data.pills || {});
       state.sect = Object.assign({ id: '', rank: 0, contribution: 0 }, data.sect || {});
       state.daily = Object.assign({ date: '', progress: {}, claimed: {} }, data.daily || {});
@@ -422,20 +605,67 @@
     setTimeout(function () { ui.heroImage.classList.remove('attack'); }, 360);
   }
 
+  function spawnSparks(container, x, y, count, spread) {
+    if (!container) return;
+    for (var i = 0; i < count; i++) {
+      var el = document.createElement('div');
+      el.className = 'spark';
+      var angle = Math.random() * Math.PI * 2;
+      var dist = (spread || 46) * (0.5 + Math.random());
+      el.style.setProperty('--dx', (Math.cos(angle) * dist).toFixed(1) + 'px');
+      el.style.setProperty('--dy', (Math.sin(angle) * dist).toFixed(1) + 'px');
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+      container.appendChild(el);
+      (function (node) { setTimeout(function () { node.remove(); }, 760); })(el);
+    }
+  }
+
+  function spawnDamageNumber(text, crit, slot) {
+    if (!ui.dmgLayer) return;
+    var el = document.createElement('div');
+    el.className = 'float-text ' + (crit ? 'crit' : 'hurt-num');
+    el.textContent = text;
+    var rect = ui.dmgLayer.getBoundingClientRect();
+    var index = slot || 0;
+    el.style.left = (rect.width * 0.5 + (index % 3) * 34 - 34 + Math.random() * 12) + 'px';
+    el.style.top = (rect.height * 0.14 + (index % 4) * 21 + Math.random() * 8) + 'px';
+    ui.dmgLayer.appendChild(el);
+    setTimeout(function () { el.remove(); }, 1100);
+  }
+
+  function spawnRipple(x, y) {
+    if (!ui.fxLayer) return;
+    var el = document.createElement('div');
+    el.className = 'ripple';
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    ui.fxLayer.appendChild(el);
+    setTimeout(function () { el.remove(); }, 800);
+  }
+
+  function levelUpSweep() {
+    if (!ui.stage) return;
+    var el = document.createElement('div');
+    el.className = 'levelup-sweep';
+    ui.stage.appendChild(el);
+    setTimeout(function () { el.remove(); }, 900);
+  }
+
   function renderTop() {
     var r = realm();
     applyRealmArt();
     ui.realmName.textContent = r.name;
     ui.realmLayer.textContent = (LAYER_NAMES[state.layer - 1] || String(state.layer)) + '层';
-    ui.qiValue.textContent = fmt(state.qi);
-    ui.stoneValue.textContent = fmt(state.stones);
+    ui.qiValue.textContent = fmt(display.ready ? display.qi : state.qi);
+    ui.stoneValue.textContent = fmt(display.ready ? display.stones : state.stones);
   }
 
   function renderProgress() {
     var req = layerRequirement();
     var pct = Math.max(0, Math.min(100, (state.xiuwei / req) * 100));
     ui.progressFill.style.width = pct.toFixed(1) + '%';
-    ui.progressValue.textContent = fmt(state.xiuwei) + ' / ' + fmt(req);
+    ui.progressValue.textContent = fmt(display.ready ? display.xiuwei : state.xiuwei) + ' / ' + fmt(req);
     ui.progressLabel.textContent = state.layer >= realm().layers ? '修为圆满 · 可渡雷劫' : '修为';
     ui.qiRate.textContent = '灵气 ' + qiPerSec().toFixed(1) + ' / 秒';
     ui.stoneRate.textContent = '灵石 ' + stonesPerSec().toFixed(1) + ' / 秒';
@@ -443,6 +673,7 @@
 
     var full = state.layer >= realm().layers && state.xiuwei >= req;
     ui.breakthroughBtn.classList.toggle('hidden', !full);
+    ui.progressFill.classList.toggle('full', state.layer >= realm().layers && state.xiuwei >= req * 0.999);
     if (full) {
       ui.btChance.textContent = '成功率 ' + breakthroughChance().toFixed(0) + '%';
       ui.breakthroughBtn.querySelector('.bt-text').textContent =
@@ -456,9 +687,28 @@
     ui.beastName.textContent = b.name;
     ui.beastHpText.textContent = fmt(state.beastHp) + ' / ' + fmt(b.maxHp);
     ui.beastHpFill.style.width = ((state.beastHp / b.maxHp) * 100).toFixed(1) + '%';
-    ui.attackPower.textContent = '剑意 ' + attackPower();
+    ui.beastImage.classList.toggle('boss', !!b.boss);
+    ui.bossTag.classList.toggle('hidden', !b.boss);
+    ui.attackPower.textContent = '剑意 ' + attackPower()
+      + ' · ' + hitCount() + ' 段 · 暴击 ' + Math.round(critChance() * 100) + '%';
+    if (b.boss) {
+      ui.battleLog.textContent = '妖王现身，血量与奖励都是寻常妖兽的数倍。';
+    }
     ui.autoBtn.textContent = '自动：' + (state.autoBattle && techLevel('heart') > 0 ? '开' : '关');
     ui.autoBtn.classList.toggle('on', state.autoBattle && techLevel('heart') > 0);
+  }
+
+  function renderAchievements() {
+    if (!ui.achList) return;
+    ui.achList.innerHTML = ACHIEVEMENTS.map(function (item) {
+      var owned = state.achievements.indexOf(item.id) >= 0;
+      return '<span class="' + (owned ? 'owned' : '') + '" title="' + item.desc + '">'
+        + (owned ? '★ ' : '☆ ') + item.name
+        + '<em>' + achBonusText(item) + '</em></span>';
+    }).join('');
+    if (ui.achCount) {
+      ui.achCount.textContent = '已解锁 ' + state.achievements.length + ' / ' + ACHIEVEMENTS.length;
+    }
   }
 
   function renderSkills() {
@@ -573,6 +823,9 @@
     var progress = state.daily.progress[id] || 0;
     if (!quest || progress < quest.goal || state.daily.claimed[id]) return;
     state.daily.claimed[id] = true;
+    if (DAILY_QUESTS.every(function (q) { return state.daily.claimed[q.id]; })) {
+      state.dailyDone = true;
+    }
     state.stones += quest.stones;
     Object.keys(quest.pills).forEach(function (pillId) {
       state.pills[pillId] = (state.pills[pillId] || 0) + quest.pills[pillId];
@@ -734,10 +987,101 @@
     setTimeout(function () { el.remove(); }, 4600);
   }
 
-  function showModal(title, body) {
+  function showModal(title, body, choices) {
     ui.modalTitle.textContent = title;
     ui.modalBody.textContent = body;
+    ui.modalChoices.innerHTML = '';
+    if (choices && choices.length) {
+      ui.modalChoices.classList.remove('hidden');
+      ui.modalOk.classList.add('hidden');
+      choices.forEach(function (choice) {
+        var button = document.createElement('button');
+        button.innerHTML = '<strong>' + choice.label + '</strong>';
+        button.addEventListener('click', function () {
+          var result = choice.run();
+          ui.modal.classList.add('hidden');
+          if (result) {
+            toast(result);
+            addLog(result, 'warn');
+          }
+          checkLayerUp();
+          renderAll();
+          save();
+        });
+        ui.modalChoices.appendChild(button);
+      });
+    } else {
+      ui.modalChoices.classList.add('hidden');
+      ui.modalOk.classList.remove('hidden');
+    }
     ui.modal.classList.remove('hidden');
+  }
+
+  /* ---------------- 随机事件与道号 ---------------- */
+
+  var eventTimer = 0;
+  var eventCooldown = 70;
+
+  function scheduleEvent() {
+    eventCooldown = 80 + Math.random() * 70;
+  }
+
+  function maybeTriggerEvent(dt) {
+    eventTimer += dt;
+    if (eventTimer < eventCooldown) return;
+    if (tut.active || !ui.modal.classList.contains('hidden')) {
+      eventTimer = eventCooldown - 10;
+      return;
+    }
+    eventTimer = 0;
+    scheduleEvent();
+    var event = EVENTS[Math.floor(Math.random() * EVENTS.length)];
+    var lines = event.choices.map(function (choice, index) {
+      return (index + 1) + '. ' + choice.label + ' —— ' + (choice.hint || '');
+    }).join('\n');
+    showModal('【' + event.tag + '】' + event.title, event.text + '\n\n' + lines, event.choices);
+  }
+
+  function achBonusText(item) {
+    var parts = [];
+    if (item.qi) parts.push('灵气 +' + Math.round(item.qi * 100) + '%');
+    if (item.atk) parts.push('剑意 +' + Math.round(item.atk * 100) + '%');
+    return parts.join('、') || '无加成';
+  }
+
+  function showAchBanner(item) {
+    if (!ui.achLayer) return;
+    var el = document.createElement('div');
+    el.className = 'ach-banner';
+    el.innerHTML =
+      '<img src="assets/icons/icon_chest.png" alt="" onerror="this.style.display=\'none\'" />' +
+      '<div class="ach-body">' +
+        '<span class="ach-kicker">解锁道号</span>' +
+        '<span class="ach-name">' + item.name + '</span>' +
+        '<span class="ach-bonus">' + achBonusText(item) + '</span>' +
+      '</div>';
+    ui.achLayer.appendChild(el);
+    setTimeout(function () { el.remove(); }, 4800);
+  }
+
+  function checkAchievements() {
+    var unlocked = false;
+    ACHIEVEMENTS.forEach(function (item) {
+      if (state.achievements.indexOf(item.id) >= 0) return;
+      if (!item.check()) return;
+      state.achievements.push(item.id);
+      unlocked = true;
+      showAchBanner(item);
+      addLog('解锁道号「' + item.name + '」（' + achBonusText(item) + '）。', 'good');
+      playSound('levelup');
+    });
+    if (unlocked) {
+      renderAchievements();
+      renderProgress();
+      renderBattle();
+      renderStats();
+      save();
+    }
   }
 
   /* ---------------- 玩法逻辑 ---------------- */
@@ -754,6 +1098,7 @@
     var x = event && event.clientX ? event.clientX - rect.left : rect.width / 2;
     var y = event && event.clientY ? event.clientY - rect.top : 120;
     floatText(x, y, '+' + fmt(gain) + ' 灵气');
+    spawnRipple(x, y);
     for (var i = 0; i < 2; i++) spawnParticle();
     checkLayerUp();
   }
@@ -767,6 +1112,8 @@
       bumpDaily('layers');
       state.sect.contribution += 3;
       playSound('levelup');
+      levelUpSweep();
+      spawnSparks(ui.fxLayer, ui.fxLayer.getBoundingClientRect().width / 2, 150, 14, 60);
       addLog('修为精进，升至 ' + realm().name + (LAYER_NAMES[state.layer - 1] || state.layer) + '层。', 'good');
       toast(realm().name + (LAYER_NAMES[state.layer - 1] || state.layer) + '层');
       renderSkills();
@@ -808,19 +1155,35 @@
     if ((state.pills[id] || 0) <= 0) return;
     state.pills[id]--;
     if (id === 'qi-pill') {
-      var gain = qiPerSec() * 40;
+      var gain = qiPerSec() * 40 * pillPower();
       state.qi += gain;
       gainXiuwei(gain);
       addLog('服下聚气丹，灵气暴涨 ' + fmt(gain) + '。', 'good');
       playSound('levelup');
       checkLayerUp();
     } else if (id === 'break-pill') {
-      state.buffs.breakBonus = Math.min(45, state.buffs.breakBonus + 15);
-      addLog('服下破障丹，雷劫成功率 +15%（当前 +' + state.buffs.breakBonus + '%）。', 'good');
+      var bonus = Math.round(15 * pillPower());
+      state.buffs.breakBonus = Math.min(60, state.buffs.breakBonus + bonus);
+      addLog('服下破障丹，雷劫成功率 +' + bonus + '%（当前 +' + state.buffs.breakBonus + '%）。', 'good');
       playSound('levelup');
     } else if (id === 'spirit-pill') {
-      state.buffs.qiMult = 60;
+      state.buffs.qiMult = Math.round(60 * pillPower());
       addLog('服下凝神丹，六十息内灵气翻倍。', 'good');
+      playSound('levelup');
+    } else if (id === 'clear-pill') {
+      state.buffs.critBoost = Math.round(60 * pillPower());
+      addLog('服下太清丹，六十息内暴击率翻倍。', 'good');
+      playSound('levelup');
+    } else if (id === 'wombo-pill') {
+      var need = layerRequirement() * 0.35 * pillPower();
+      gainXiuwei(need);
+      addLog('服下悟道丹，修为骤增 ' + fmt(need) + '。', 'good');
+      playSound('levelup');
+      checkLayerUp();
+    } else if (id === 'treasure-pill') {
+      var treasure = Math.max(30, stonesPerSec() * 60 * pillPower());
+      state.stones += treasure;
+      addLog('服下聚宝丹，灵石 +' + fmt(treasure) + '。', 'good');
       playSound('levelup');
     }
     bumpDaily('pills');
@@ -831,14 +1194,36 @@
   function attack() {
     var b = beastForState();
     if (!state.beastHp || state.beastHp > b.maxHp) state.beastHp = b.maxHp;
-    var dmg = attackPower() * (0.85 + Math.random() * 0.3);
-    state.beastHp -= dmg;
+    var hits = hitCount();
+    var total = 0;
+    var crit = false;
+    var damages = [];
+    for (var i = 0; i < hits; i++) {
+      var isCrit = Math.random() < critChance();
+      if (isCrit) crit = true;
+      var hitDamage = attackPower() * (0.85 + Math.random() * 0.3) * (isCrit ? critMultiplier() : 1);
+      damages.push({ value: hitDamage, crit: isCrit });
+      total += hitDamage;
+    }
+    state.beastHp -= total;
     playSound('attack');
     ui.beastImage.classList.remove('hurt');
     void ui.beastImage.offsetWidth;
     ui.beastImage.classList.add('hurt');
     playAttackFx();
-    ui.battleLog.textContent = '飞剑斩出 ' + fmt(dmg) + ' 点伤害。';
+    damages.forEach(function (hit, index) {
+      setTimeout(function () {
+        spawnDamageNumber((hit.crit ? '暴击 ' : '') + '-' + fmt(hit.value), hit.crit, index);
+      }, index * 80);
+    });
+    if (crit) {
+      ui.stage.classList.remove('shake-soft');
+      void ui.stage.offsetWidth;
+      ui.stage.classList.add('shake-soft');
+      setTimeout(function () { ui.stage.classList.remove('shake-soft'); }, 520);
+    }
+    ui.battleLog.textContent = (hits > 1 ? hits + ' 道飞剑齐出，' : '飞剑斩出 ')
+      + (crit ? '暴击 ' : '') + fmt(total) + ' 点伤害。';
     if (state.beastHp <= 0) {
       state.beastKills++;
       state.records.totalKills++;
@@ -848,8 +1233,25 @@
       gainXiuwei(b.xiuwei);
       playSound('win');
       ui.beastImage.classList.add('dead');
-      addLog('斩落' + b.name + '，得灵石 ' + fmt(b.stones) + '、修为 ' + fmt(b.xiuwei) + '。', 'good');
-      ui.battleLog.textContent = '妖兽伏诛，灵石 +' + fmt(b.stones) + '。';
+      var combatRect = ui.dmgLayer.getBoundingClientRect();
+      spawnSparks(ui.dmgLayer, combatRect.width * 0.22, combatRect.height * 0.5,
+        b.boss ? 22 : 12, b.boss ? 72 : 46);
+      if (b.boss) {
+        state.bossKills++;
+        state.sinceBoss = 0;
+        state.forceBoss = false;
+        var dropIndex = Math.floor(Math.random() * 4);
+        var dropId = ['qi-pill', 'break-pill', 'spirit-pill', 'clear-pill'][dropIndex];
+        state.pills[dropId] = (state.pills[dropId] || 0) + 1;
+        var dropPill = PILLS.filter(function (p) { return p.id === dropId; })[0];
+        addLog('妖王伏诛！得灵石 ' + fmt(b.stones) + '、修为 ' + fmt(b.xiuwei) +
+          '，并掉落' + (dropPill ? dropPill.name : '丹药') + '。', 'good');
+        ui.battleLog.textContent = '妖王伏诛，额外掉落丹药！';
+      } else {
+        state.sinceBoss++;
+        addLog('斩落' + b.name + '，得灵石 ' + fmt(b.stones) + '、修为 ' + fmt(b.xiuwei) + '。', 'good');
+        ui.battleLog.textContent = '妖兽伏诛，灵石 +' + fmt(b.stones) + '。';
+      }
       setTimeout(function () {
         ui.beastImage.classList.remove('dead');
         state.beastHp = beastForState().maxHp;
@@ -925,6 +1327,24 @@
   var accumulator = 0;
   var autoTimer = 0;
   var saveTimer = 0;
+  var cultivateTimer = 0;
+  var achTimer = 0;
+  var display = { qi: 0, stones: 0, xiuwei: 0, ready: false };
+
+  function tweenNumber(key, target, dt) {
+    if (!display.ready) {
+      display[key] = target;
+      return target;
+    }
+    var current = display[key];
+    var diff = target - current;
+    if (Math.abs(diff) <= Math.max(0.6, Math.abs(target) * 0.002)) {
+      display[key] = target;
+      return target;
+    }
+    display[key] = current + diff * Math.min(1, dt * 5.5);
+    return display[key];
+  }
 
   function tick(dt) {
     state.playTime += dt;
@@ -934,8 +1354,18 @@
     state.stones += stonesPerSec() * dt;
 
     if (state.buffs.qiMult > 0) state.buffs.qiMult = Math.max(0, state.buffs.qiMult - dt);
+    if (state.buffs.critBoost > 0) state.buffs.critBoost = Math.max(0, state.buffs.critBoost - dt);
 
     checkLayerUp();
+
+    var autoCultivate = autoCultivateInterval();
+    if (autoCultivate > 0) {
+      cultivateTimer += dt * 1000;
+      if (cultivateTimer >= autoCultivate) {
+        cultivateTimer = 0;
+        doCultivate(null);
+      }
+    }
 
     if (state.autoBattle && techLevel('heart') > 0) {
       var interval = autoInterval() / 1000;
@@ -947,6 +1377,18 @@
     } else {
       autoTimer = 0;
     }
+
+    maybeTriggerEvent(dt);
+    achTimer += dt;
+    if (achTimer > 0.6) {
+      achTimer = 0;
+      checkAchievements();
+    }
+
+    display.qi = tweenNumber('qi', state.qi, dt);
+    display.stones = tweenNumber('stones', state.stones, dt);
+    display.xiuwei = tweenNumber('xiuwei', state.xiuwei, dt);
+    display.ready = true;
 
     accumulator += dt;
     if (accumulator > 0.5) {
@@ -1000,7 +1442,7 @@
     { tab: 'pills', target: '#pillList', title: '丹药', text: '丹药用来应急：聚气丹立刻补灵气，破障丹让下一轮渡劫更容易成功，凝神丹让六十息内灵气翻倍。' },
     { tab: 'daily', target: '#questList', title: '日课', text: '每天四件小事：打坐、斩妖、升层、服丹。做完可领灵石和丹药，过了零点自动刷新。' },
     { tab: 'grotto', target: '#sectCard', title: '宗门', text: '拜入一个门派可以得到长期加护：青云宗加灵气、太虚剑派加剑意、丹霞谷省炼丹钱。斩妖和突破会积攒贡献，贡献能换职位。' },
-    { tab: 'grotto', target: '#rankList', title: '天榜与存档', text: '天榜按「道行」排名，往下还有修行统计、日志和存档按钮。存档存在你自己的浏览器里，换设备不会同步。想再看一遍，点「重看新手教程」。' }
+    { tab: 'grotto', target: '#rankList', title: '天榜、道号与存档', text: '天榜按「道行」排名；下面的道号达成条件即解锁，给永久加成。修行途中会随机跳出「机缘」「危难」这类事件，不同选择结果不同。存档在你自己的浏览器里，换设备不同步；想再看一遍教程，点「重看新手教程」。' }
   ];
 
   var tut = { active: false, index: 0, raised: [], focused: null };
@@ -1116,6 +1558,10 @@
       btChance: document.getElementById('btChance'),
       beastImage: document.getElementById('beastImage'),
       slashFx: document.getElementById('slashFx'),
+      dmgLayer: document.getElementById('dmgLayer'),
+      fxLayer: document.getElementById('fxLayer'),
+      achLayer: document.getElementById('achLayer'),
+      bossTag: document.getElementById('bossTag'),
       beastName: document.getElementById('beastName'),
       beastHpFill: document.getElementById('beastHpFill'),
       beastHpText: document.getElementById('beastHpText'),
@@ -1134,6 +1580,8 @@
       sectCard: document.getElementById('sectCard'),
       rankList: document.getElementById('rankList'),
       rankNote: document.getElementById('rankNote'),
+      achList: document.getElementById('achList'),
+      achCount: document.getElementById('achCount'),
       tutDim: document.getElementById('tutDim'),
       tutTip: document.getElementById('tutTip'),
       tutTitle: document.getElementById('tutTitle'),
@@ -1148,6 +1596,7 @@
       modalTitle: document.getElementById('modalTitle'),
       modalBody: document.getElementById('modalBody'),
       modalOk: document.getElementById('modalOk'),
+      modalChoices: document.getElementById('modalChoices'),
       soundToggle: document.getElementById('soundToggle'),
       thunderLayer: document.getElementById('thunderLayer')
     };
@@ -1207,6 +1656,16 @@
       }, 700);
     }
 
+    if (location.hash === '#preview' || location.hash === '#autotest') {
+      window.__xiuxian = {
+        state: state,
+        renderAll: renderAll,
+        addStones: function (amount) { state.stones += amount; renderAll(); },
+        spawnBoss: function () { state.forceBoss = true; state.beastHp = 0; renderBattle(); },
+        triggerEvent: function () { eventTimer = eventCooldown; maybeTriggerEvent(0.1); }
+      };
+    }
+
     if (offline && offline.seconds > 60) {
       var minutes = Math.floor(offline.seconds / 60);
       addLog('闭关 ' + minutes + ' 分钟，归来时灵气充盈。', 'good');
@@ -1227,6 +1686,7 @@
     renderDaily();
     renderSect();
     renderRank();
+    renderAchievements();
     renderBattle();
     renderStats();
     renderLog();
@@ -1266,6 +1726,40 @@
     upgradeTech('insight');
     step('insight_lv', techLevel('insight'));
     step('break_chance', breakthroughChance().toFixed(0));
+
+    state.stones += 20000;
+    upgradeTech('sense');
+    upgradeTech('formation');
+    upgradeTech('root');
+    upgradeTech('enlighten');
+    step('sense_lv', techLevel('sense'));
+    step('crit_chance', Math.round(critChance() * 100));
+    step('hit_count', hitCount());
+    step('qi_per_sec_with_root', qiPerSec().toFixed(2));
+    step('auto_cultivate_ms', autoCultivateInterval());
+
+    state.forceBoss = true;
+    state.beastHp = 0;
+    for (var k = 0; k < 400 && state.forceBoss; k++) attack();
+    step('boss_kills', state.bossKills);
+
+    eventTimer = eventCooldown;
+    maybeTriggerEvent(0.1);
+    step('event_modal_open', !ui.modal.classList.contains('hidden'));
+    step('event_choice_buttons', ui.modalChoices.querySelectorAll('button').length);
+    var eventChoice = ui.modalChoices.querySelector('button');
+    if (eventChoice) eventChoice.click();
+    step('event_modal_closed', ui.modal.classList.contains('hidden'));
+
+    checkAchievements();
+    step('achievements', state.achievements.length);
+
+    state.pills['clear-pill'] = 1;
+    usePill('clear-pill');
+    step('crit_boost_active', state.buffs.critBoost > 0);
+    state.pills['treasure-pill'] = 1;
+    usePill('treasure-pill');
+    step('pill_kinds', Object.keys(state.pills).length);
 
     state.layer = realm().layers;
     state.xiuwei = layerRequirement();

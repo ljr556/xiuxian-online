@@ -34,6 +34,7 @@
       <div class="mist"></div>
       <div class="bg-tint"></div>
       <div class="qi-particles" id="particles"></div>
+      <div class="fx-layer" id="fxLayer"></div>
 
       <div class="hero-wrap" id="heroWrap">
         <div class="hero-aura"></div>
@@ -64,9 +65,11 @@
     </main>
 
     <section class="combat" id="combatPanel">
+      <div class="dmg-layer" id="dmgLayer"></div>
       <div class="beast-side">
         <img class="beast" id="beastImage" src="assets/beast.png" alt="妖兽" />
         <div class="beast-name" id="beastName">妖狼</div>
+        <div class="boss-tag hidden" id="bossTag">妖王降临</div>
       </div>
       <div class="battle-side">
         <div class="bar beast-bar"><div class="bar-fill beast-hp" id="beastHpFill"></div></div>
@@ -127,6 +130,8 @@
       <div class="section-title">天榜 · 道行排行</div>
       <div class="rank-list" id="rankList"></div>
       <p class="rank-note" id="rankNote"></p>
+      <div class="section-title">道号 <span class="section-sub" id="achCount"></span></div>
+      <div class="ach-list" id="achList"></div>
       <div class="section-title">道途统计</div>
       <div class="stats" id="statsBox"></div>
       <div class="section-title">修行记事</div>
@@ -144,6 +149,7 @@
   </div>
 
   <div class="toast-layer" id="toastLayer"></div>
+  <div class="ach-layer" id="achLayer"></div>
   <div class="tut-dim hidden" id="tutDim"></div>
   <div class="tut-tip hidden" id="tutTip">
     <h4 id="tutTitle"></h4>
@@ -161,6 +167,7 @@
     <div class="modal-card">
       <h2 id="modalTitle">闭关归来</h2>
       <p id="modalBody"></p>
+      <div class="modal-choices hidden" id="modalChoices"></div>
       <button class="btn primary" id="modalOk">继续修行</button>
     </div>
   </div>
